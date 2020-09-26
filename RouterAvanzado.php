@@ -18,6 +18,7 @@ $r->addRoute("insert","POST","ProductsController","InsertProducts");
 $r->addRoute("delete/:ID","GET","ProductsController","DeleteProducts");
 $r->addRoute("completar/:ID","GET","ProductsController","MarkCompletedTask");
 
+//ver
 $r->addRoute("ordenar/:ID","GET","ProductsController","GetCategories");
 
 
