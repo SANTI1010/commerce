@@ -18,11 +18,6 @@ class ProductsView {
 	}
 
 
-
-	function ShowCategories($categories) {
-		var_dump("llega");
-	}
-
 	function ShowHomeLocation() {
 		header("Location: ".BASE_URL."home");
 	}

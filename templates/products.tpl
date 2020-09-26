@@ -6,7 +6,7 @@
 
       	{foreach from = $products item=product}
 
-      			<li class="list-group-item list-group-item-success" >{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}{$product->id_producto}">Borrar</a></button></li>
+      			<li class="list-group-item list-group-item-success" >{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button></li>
       		
      	{/foreach}
 

@@ -36,12 +36,6 @@ class ProductsModel {
 		    $sentencia->execute(array($task_id));  
 		}
 
-		function GetCategories($categorie){
-			$sentencia = $this->db->prepare("SELECT * FROM productos WHERE id_categoria=?");
-		    $sentencia->execute(array($categorie));  
-		    return $sentencia->fetchAll(PDO::FETCH_OBJ);
-		}
-
 
 	
 }
