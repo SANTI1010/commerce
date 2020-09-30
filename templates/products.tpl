@@ -1,23 +1,36 @@
 {include file="header.tpl"}
+		    
+	<section>
+		<div class="contenedor">
+			<h1 class="titulo">Especialista en Voleyball</h1>
+			<p>En Voley en Casa tenes tu tienda online pensada para ofrecerte los mejores artículos de voley para tu seguridad ya sea entrenando o en partido!</p>            
 
-<div class="container">
+			<h2 class="subtitulo">La importancia de la proteccion de rodillas y codos</h2>
+			
+			<p>Cuando empezas a jugar al volleyball, tu cuerpo todavía no está acostumbrado a los golpes que vas a recibir, así que, al principio es importante que tengas protectores para los codos y las rodillas. Las mangas son una buena elección para aquellas personas que se preocupan mucho por sus brazos, o que tienen la piel demasiado sensible. Estas deben ser de licra, o algodón, y que deje transpirar bien a la piel. Algunas veces va a ser inevitable que tengas que lanzarte en plancha o de lado para alcanzar la pelota, y para esto estan las rodilleras, que te ayudaran a preparar tu cuerpo de los golpes y las caidas!.
+			</p>
+		</div>
+	</section>
+
+
+	<div class="container">
 
   	<ul class="list-group">
 
       	{foreach from = $products item=product}
 
-      			<li class="list-group-item list-group-item-success" >{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button></li>
+      			<li class="list-group-item list-group-item-success" >{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>
       		
      	{/foreach}
 
  	</ul>
+
+ 	<a href="ordenar/1">Seleccionar por Rodilleras</a>
+ 	<a href="ordenar/2">Seleccionar por Mangas</a>
+
+
+
 </div>
-
-
-
-<a href="ordenar/'2">Seleccionar las Mangas</a>
-
-
 
 
 
@@ -49,36 +62,11 @@
 
 
 
-		    <header class="barra contenedor">
-		<div class="encabezado">
-				<img src="img/logo.jpg" alt="Logo página">
-			<ul class="navegador">
-				<li><a href="index.html">Inicio</a></li>
-				<li><a target="_blank" href="rodilleras.html">Rodilleras</a></li>
-				<li><a target="_blank" href="mangas.html">Mangas</a></li>
-			</ul>
-			<div class="btn_menu">
-				<a href="#">MENÚ</a>
-			</div>
-		</div>
-		<ul class="navegador_mobil">
-				<li><a href="index.html">Inicio</a></li>
-				<li><a target="_blank" href="rodilleras.html">Rodilleras</a></li>
-				<li><a target="_blank" href="mangas.html">Mangas</a></li>
-		</ul>
-	</header>
 
-	<section>
-		<div class="contenedor">
-			<h1 class="titulo">Especialista en Voleyball</h1>
-			<p>En Voley en Casa tenes tu tienda online pensada para ofrecerte los mejores artículos de voley para tu seguridad ya sea entrenando o en partido!</p>            
 
-			<h2 class="subtitulo">La importancia de la proteccion de rodillas y codos</h2>
-			
-			<p>Cuando empezas a jugar al volleyball, tu cuerpo todavía no está acostumbrado a los golpes que vas a recibir, así que, al principio es importante que tengas protectores para los codos y las rodillas. Las mangas son una buena elección para aquellas personas que se preocupan mucho por sus brazos, o que tienen la piel demasiado sensible. Estas deben ser de licra, o algodón, y que deje transpirar bien a la piel. Algunas veces va a ser inevitable que tengas que lanzarte en plancha o de lado para alcanzar la pelota, y para esto estan las rodilleras, que te ayudaran a preparar tu cuerpo de los golpes y las caidas!.
-			</p>
-		</div>
-	</section>
+
+
+
 
 	<section>
 		<div class="contenedor">

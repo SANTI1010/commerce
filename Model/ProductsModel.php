@@ -8,12 +8,13 @@ class ProductsModel {
 
 		$this->db = new PDO('mysql:host=localhost;'.'dbname=db_productos;charset=utf8', 'root', ''); 
 
-	}	//Seleccionar
+	}	
+
+		//Seleccionar
 		function GetProducts(){
 		    $sentencia = $this->db->prepare("SELECT * FROM productos");
 		    $sentencia->execute();
 		    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
-
 		}
 
 		//Insertar
@@ -28,6 +29,12 @@ class ProductsModel {
 		    $sentencia->execute(array($product_id));
 		}
 
+				//Detallar
+		function DetalleProducts($id){
+		    $sentencia = $this->db->prepare("SELECT * FROM productos WHERE id_producto=?");
+		    $sentencia->execute(array($id));
+		    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
+		}
 
 
 		//Actualizar

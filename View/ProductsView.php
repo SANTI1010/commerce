@@ -18,6 +18,15 @@ class ProductsView {
 	}
 
 
+		function ShowDetalle($detalle) {
+		// inicializo Smarty y asigno las variables para mostrar
+		$smarty = new Smarty();
+		$smarty->assign('detalle', $detalle);
+		$smarty->display('templates/detalle.tpl'); // muestro el template   
+	}
+
+
+
 	function ShowHomeLocation() {
 		header("Location: ".BASE_URL."home");
 	}

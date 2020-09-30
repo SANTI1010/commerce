@@ -40,11 +40,16 @@ class ProductsController {
 		$this->view->ShowHomeLocation();
 	}
 
-	function GetCategories($params = null) {
-		$categories = $params[':ID'];
-		$this->model->GetCategories($categories);
-		$this->view->ShowCategories($categories);
-		$this->view->ShowHomeLocation();		
+
+	function DetalleProducts($params = null) {
+		$id = $params[':ID'];
+		$detalle = $this->model->DetalleProducts($id);
+		$this->view->ShowDetalle($detalle);
+	}
+
+
+	function volver() {
+		$this->view->ShowHomeLocation();
 	}
 
 
