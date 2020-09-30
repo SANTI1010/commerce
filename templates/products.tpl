@@ -25,8 +25,10 @@
 
  	</ul>
 
- 	<a href="ordenar/1">Seleccionar por Rodilleras</a>
- 	<a href="ordenar/2">Seleccionar por Mangas</a>
+ 	<button type="button" class="btn btn-primary"><a href="ordenar/1" class="btn-text">Seleccionar por Rodilleras</a></button>
+
+ 	<button type="button" class="btn btn-primary"><a href="ordenar/2" class="btn-text">Seleccionar por Mangas</a></button>
+ 	
 
 
 

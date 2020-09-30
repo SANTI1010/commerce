@@ -197,6 +197,19 @@ fieldset {
 	margin-left: 25%;
 } 
 
+
+
+a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+.btn-text {
+	text-transform: none;
+	color: white;
+	text-decoration: none;
+}
+
 /************************/
 /******PRUEBA FORM******/
 /***********************/
