@@ -18,10 +18,9 @@ class ProductsController {
 	}
 
 
-	function Home($params = null) {
-		$cat = $params[':categorie'];
+	function Home() {
 		$products = $this->model->GetProducts();
-		$categories = $this->modelCategories->GetCategories($cat);
+		$categories = $this->modelCategories->GetCategories();
 
 		$this->view->ShowHome($products, $categories);
 	}

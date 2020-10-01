@@ -9,9 +9,9 @@ class CategoriesModel {
 	}	
 
 
-	function GetCategories($id){
-	    $sentencia = $this->db->prepare("SELECT * FROM productos WHERE id_categoria=?");
-	    $sentencia->execute(array($id));
+	function GetCategories(){
+	    $sentencia = $this->db->prepare("SELECT * FROM categorias");
+	    $sentencia->execute(array());
 	    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
 	}
 	

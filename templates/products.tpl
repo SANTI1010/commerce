@@ -19,27 +19,14 @@
 
       	{foreach from = $products item=product}
 
-      			<li class="list-group-item list-group-item-success" >{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>
-      		
+      			<li class="list-group-item list-group-item-success" >{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
      	{/foreach}
-
-
-
-
  	</ul>
 
 
- 	      	{foreach from = $categorias item=categoria}
-
-      			<li><a href="{$categoria->id_categoria}"><button type="button" class="btn btn-danger">Categoria</button></li>
-      		
-     	{/foreach}
-
- 	<button type="button" class="btn btn-primary"><a href="ordenar/1" class="btn-text">Seleccionar por Rodilleras</a></button>
-
- 	<button type="button" class="btn btn-primary"><a href="ordenar/2" class="btn-text">Seleccionar por Mangas</a></button>
- 	
-
+  	{foreach from = $categorias item=categoria}
+		<li><button type="button" class="btn btn-danger"><a class="btn-text" href="ordenar/{$categoria->id_categoria}">{$categoria->nombre}</a></button></li>
+	{/foreach}
 
 
 </div>
