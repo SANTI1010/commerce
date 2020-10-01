@@ -3,23 +3,22 @@
 
 	<div class="container">
 
-  	<ul class="list-group">
+	  	<ul class="list-group">
 
-      	{foreach from = $detalle item=detalles}
+	      	{foreach from = $detalle item=detalles}
 
-      		<p>{$detalles->marca}</p>
-      		<p>{$detalles->talle}</p>
-      		<p>{$detalles->precio}</p>
-      
-      		
-     	{/foreach}
+	      		<li class="list-group-item list-group-item-success">{$detalles->marca}</li>
+	      		<li class="list-group-item list-group-item-success">{$detalles->talle}</li>
+	      		<li class="list-group-item list-group-item-success">{$detalles->precio}</li>
+	      
+	      		
+	     	{/foreach}
 
- 	</ul>
+	 	</ul>
 
- 	 	<a href="volver">Volver</a>
+	 	<a href="volver">Volver</a>
 
-
-</div>
+	</div>
 
 {include file="footer.tpl"}		
 

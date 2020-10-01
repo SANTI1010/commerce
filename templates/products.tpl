@@ -19,7 +19,7 @@
 
       	{foreach from = $products item=product}
 
-      			<li class="list-group-item list-group-item-success" >{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
+      			<li class="list-group-item list-group-item-success">{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
      	{/foreach}
  	</ul>
 
@@ -28,9 +28,7 @@
 		<li><button type="button" class="btn btn-danger"><a class="btn-text" href="ordenar/{$categoria->id_categoria}">Filtrar por {$categoria->nombre}</a></button></li>
 	{/foreach}
 
-
 </div>
-
 
 
 <div class="container">
@@ -38,8 +36,10 @@
 		          <div class="form-group">
 		          	<label for="inputState">Categorias</label>
 				      <select name="categoria" class="form-control">
-				        <option value="1">Rodillera veeer</option>
-				        <option value="2">Mangas verrr</option>
+				      	<option id="optionOculto" value="0"  hidden>--Seleccionar--</option>
+					    {foreach from = $categorias item=categoria}
+						    <option value="{$categoria->id_categoria}">{$categoria->nombre}</option>
+						{/foreach}
 				      </select>
 		            <label for="marca">Marca</label>
 		            <input class="form-control" id="marca" name="input_marca" aria-describedby="emailHelp">
@@ -57,11 +57,6 @@
 		          <button type="submit" class="btn btn-primary">Agregar</button>
 		        </form>
 		    </div>
-
-
-
-
-
 
 
 

@@ -61,7 +61,6 @@ class ProductsController {
 	}
 
 
-
 	function volver() {
 		$this->view->ShowHomeLocation();
 	}

@@ -41,7 +41,7 @@ class ProductsModel {
 	    $sentencia = $this->db->prepare("SELECT * FROM productos INNER JOIN categorias ON productos.id_categoria = categorias.id_categoria WHERE  productos.id_categoria=?");
 	    $sentencia->execute(array($id));
 	    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
-	}
+		}
 
 
 		//Actualizar
