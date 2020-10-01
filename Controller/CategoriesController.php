@@ -15,11 +15,12 @@ class CategoriesController {
 	}
 
 
-	function GetCategories($params = null){
-		$categorie = $params[':categorie'];	
+	function GetCategories(){
 		$categories = $this->model->GetCategories($categorie);
 		$this->view->ShowCategories($categories);
 	}
+
+	
 
 	
 

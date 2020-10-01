@@ -3,18 +3,20 @@
 require_once "./View/ProductsView.php";
 require_once "./Model/ProductsModel.php";
 require_once "./Model/CategoriesModel.php";
-
+require_once "./View/CategoriesView.php";
 
 class ProductsController {
 
 	private $view;
 	private $model;
 	private $modelCategories;
+	private $viewCategories;
 
 	function __construct(){
 		$this->view = new ProductsView();
 		$this->model = new ProductsModel();
 		$this->modelCategories = new CategoriesModel();
+		$this->viewCategories = new CategoriesView();
 	}
 
 
@@ -52,11 +54,11 @@ class ProductsController {
 		$this->view->ShowDetalle($detalle);
 	}
 
-
-
-
-
-
+	function GetCategoriesOrder($params = null){
+		$idCateg = $params[':categorie'];
+		$categories = $this->model->GetCategoriesOrder($idCateg);
+		$this->viewCategories->ShowCategories($categories);
+	}
 
 
 

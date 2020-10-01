@@ -25,7 +25,7 @@
 
 
   	{foreach from = $categorias item=categoria}
-		<li><button type="button" class="btn btn-danger"><a class="btn-text" href="ordenar/{$categoria->id_categoria}">{$categoria->nombre}</a></button></li>
+		<li><button type="button" class="btn btn-danger"><a class="btn-text" href="ordenar/{$categoria->id_categoria}">Filtrar por {$categoria->nombre}</a></button></li>
 	{/foreach}
 
 

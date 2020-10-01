@@ -32,5 +32,3 @@
 	</header>
 
 <body>
-
-	<p>TITULO</p>
