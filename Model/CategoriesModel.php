@@ -14,8 +14,6 @@ class CategoriesModel {
 	    $sentencia->execute(array($id));
 	    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
 	}
-
-
 	
 }
 

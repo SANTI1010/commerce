@@ -2,22 +2,28 @@
 
 require_once "./View/ProductsView.php";
 require_once "./Model/ProductsModel.php";
+require_once "./Model/CategoriesModel.php";
 
 
 class ProductsController {
 
 	private $view;
 	private $model;
+	private $modelCategories;
 
 	function __construct(){
 		$this->view = new ProductsView();
 		$this->model = new ProductsModel();
+		$this->modelCategories = new CategoriesModel();
 	}
 
 
-	function Home() {
+	function Home($params = null) {
+		$cat = $params[':categorie'];
 		$products = $this->model->GetProducts();
-		$this->view->ShowHome($products);
+		$categories = $this->modelCategories->GetCategories($cat);
+
+		$this->view->ShowHome($products, $categories);
 	}
 
 	function InsertProducts() {
@@ -46,6 +52,13 @@ class ProductsController {
 		$detalle = $this->model->DetalleProducts($id);
 		$this->view->ShowDetalle($detalle);
 	}
+
+
+
+
+
+
+
 
 
 	function volver() {

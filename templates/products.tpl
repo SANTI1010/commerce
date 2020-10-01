@@ -23,7 +23,17 @@
       		
      	{/foreach}
 
+
+
+
  	</ul>
+
+
+ 	      	{foreach from = $categorias item=categoria}
+
+      			<li><a href="{$categoria->id_categoria}"><button type="button" class="btn btn-danger">Categoria</button></li>
+      		
+     	{/foreach}
 
  	<button type="button" class="btn btn-primary"><a href="ordenar/1" class="btn-text">Seleccionar por Rodilleras</a></button>
 

@@ -20,7 +20,7 @@ $r->addRoute("detalle/:ID","GET","ProductsController","DetalleProducts");
 $r->addRoute("completar/:ID","GET","ProductsController","MarkCompletedTask");
 
 //ver
-$r->addRoute("ordenar/:categorie","GET","CategoriesController","GetCategories");
+$r->addRoute("ordenar/:categorie","GET","ProductsController","Home");
 
 //volver
 $r->addRoute("volver","GET","ProductsController","volver");

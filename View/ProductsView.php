@@ -9,11 +9,12 @@ class ProductsView {
 		$this->title = "Lista de Productos";
 	}
 
-	function ShowHome($products) {
+	function ShowHome($products,$categorias) {
 		// inicializo Smarty y asigno las variables para mostrar
 		$smarty = new Smarty();
 		$smarty->assign('titulo',$this->title);
 		$smarty->assign('products', $products);
+		$smarty->assign('categorias', $categorias);
 		$smarty->display('templates/products.tpl'); // muestro el template   
 	}
 
