@@ -13,6 +13,11 @@ class ProductsController {
 	private $viewCategories;
 
 	function __construct(){
+
+	/***********************************/
+	/*Solo para cuando es acceso privado va en el __construct() */
+	/*      $this->checkLoggedIn();     */
+	/***********************************/
 		$this->view = new ProductsView();
 		$this->model = new ProductsModel();
 		$this->modelCategories = new CategoriesModel();
@@ -20,7 +25,23 @@ class ProductsController {
 	}
 
 
+	private function checkLoggedIn(){
+		session_start();
+		if(!isset($_SESSION["NOMBRE"])){
+			header("Location:".LOGIN);
+			die();//corto toda la ejecucion
+		}else{
+			if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) { 
+				header("Location:".LOGOUT);
+				die();//corto toda la ejecucion
+			} 
+		}
+	}
+
 	function Home() {
+		//chequeo session
+		$this->checkLoggedIn();
+
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
 
@@ -49,6 +70,7 @@ class ProductsController {
 
 
 	function DetalleProducts($params = null) {
+		$this->checkLoggedIn();
 		$id = $params[':ID'];
 		$detalle = $this->model->DetalleProducts($id);
 		$this->view->ShowDetalle($detalle);

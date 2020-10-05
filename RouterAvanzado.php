@@ -1,16 +1,29 @@
 <?php 
 
+require_once('Controller/UserController.php');
 require_once('Controller/ProductsController.php');
 require_once('Controller/CategoriesController.php');
 require_once('RouterClass.php');
 
 //Constantes para ruteo
 define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
+define("LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/login');
+define("LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/logout');
+
+
+
 
 $r = new Router();
 
-//rutas
+//home
 $r->addRoute("home","GET","ProductsController","Home");
+
+//Login
+$r->addRoute("login","GET","UserController","Login");
+$r->addRoute("verifyUser","POST","UserController","VerifyUser");
+$r->addRoute("logout","GET","UserController","Logout");
+
+
 //El insert lo veo en TasksView
 $r->addRoute("insert","POST","ProductsController","InsertProducts");
 $r->addRoute("delete/:ID","GET","ProductsController","DeleteProducts");
