@@ -29,6 +29,8 @@ html {
 }
 
 
+
+
 /*********************/
 /****NAVEGACION******/
 /*******************/
@@ -781,4 +783,11 @@ a:hover {
 .div-filtrar {
 	display: flex;
 	flex-direction: column;
+}
+
+
+#logout {
+	background-color: yellow;
+	position: absolute;
+ 	left: 500px;
 }

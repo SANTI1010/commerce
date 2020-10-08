@@ -20,14 +20,11 @@ class UserController {
 		$this->view->ShowLogin();
 	}
 
-
-
 	function Logout() {
 		session_start();
 		session_destroy();
 		header("Location:".LOGIN);
 	}
-
 
 
 	function VerifyUser() {
@@ -36,7 +33,7 @@ class UserController {
 
 		if(isset($user)){
 			$userFromDB = $this->model->GetUser($user);
-		
+			
 			if(isset($userFromDB) && $userFromDB){ //existe y es true.
 				//	Existe el usuario
 				if(password_verify($pass, $userFromDB->password)){

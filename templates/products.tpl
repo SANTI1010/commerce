@@ -16,16 +16,15 @@
 	<div class="container">
 
   	<ul class="list-group">
-
+  		<h1 class="titulo">Listado de items</h1>
       	{foreach from = $products item=product}
-
-      			<li class="list-group-item list-group-item-success">{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
+  			<li class="list-group-item list-group-item-success">{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
      	{/foreach}
  	</ul>
 
-
+ 	<h1 class="titulo">Listado de Categorias</h1>
   	{foreach from = $categorias item=categoria}
-		<li><button type="button" class="btn btn-danger"><a class="btn-text" href="ordenar/{$categoria->id_categoria}">Filtrar por {$categoria->nombre}</a></button></li>
+		<button type="button" class="btn btn-danger"><a class="btn-text" href="ordenar/{$categoria->id_categoria}">Filtrar por {$categoria->nombre}</a></button>
 	{/foreach}
 
 </div>

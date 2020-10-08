@@ -12,7 +12,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="js/responsive.js"></script>
 </head>
-<header class="barra contenedor">
+
+	<header class="barra contenedor">
+		<button type="button" class="btn btn-danger" id="logout"><a class="btn-text" href="login/">Login</a></button>
+		<button type="button" class="btn btn-danger" id="logout"><a class="btn-text" href="logout/">Logout</a></button>
 		<div class="encabezado">
 				<img src="img/logo.jpg" alt="Logo página">
 			<ul class="navegador">
@@ -30,5 +33,6 @@
 				<li><a target="_blank" href="mangas.html">Mangas</a></li>
 		</ul>
 	</header>
+
 
 <body>

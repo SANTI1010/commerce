@@ -40,13 +40,20 @@ class ProductsController {
 
 	function Home() {
 		//chequeo session
-		$this->checkLoggedIn();
+		//$this->checkLoggedIn();
 
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
 
 		$this->view->ShowHome($products, $categories);
 	}
+
+
+	function HomeAdmin() {
+		$this->checkLoggedIn();
+	}
+
+
 
 	function InsertProducts() {
 		$categoria = $_POST['categoria'];
