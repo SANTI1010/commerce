@@ -15,7 +15,6 @@
 
 	<header class="barra contenedor">
 		<button type="button" class="btn btn-danger" id="logout"><a class="btn-text" href="login/">Login</a></button>
-		<button type="button" class="btn btn-danger" id="logout"><a class="btn-text" href="logout/">Logout</a></button>
 		<div class="encabezado">
 				<img src="img/logo.jpg" alt="Logo página">
 			<ul class="navegador">

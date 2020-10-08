@@ -18,6 +18,8 @@ $r = new Router();
 //home
 $r->addRoute("home","GET","ProductsController","Home");
 
+$r->addRoute("homeAdmin","GET","ProductsController","HomeAdmin");
+
 //Login
 $r->addRoute("login","GET","UserController","Login");
 $r->addRoute("verifyUser","POST","UserController","VerifyUser");
@@ -27,6 +29,10 @@ $r->addRoute("logout","GET","UserController","Logout");
 //El insert lo veo en TasksView
 $r->addRoute("insert","POST","ProductsController","InsertProducts");
 $r->addRoute("delete/:ID","GET","ProductsController","DeleteProducts");
+
+
+$r->addRoute("editProducts/:ID","GET","ProductsController","EditProducts");
+$r->addRoute("updateProducts/:ID","POST","ProductsController","UpdateProducts");
 
 $r->addRoute("detalle/:ID","GET","ProductsController","DetalleProducts");
 

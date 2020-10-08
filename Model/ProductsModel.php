@@ -45,9 +45,18 @@ class ProductsModel {
 
 
 		//Actualizar
-		function MarkCompletedTask($task_id) {
-		    $sentencia = $this->db->prepare("UPDATE task SET completed=1 WHERE id=?");
-		    $sentencia->execute(array($task_id));  
+		function UpdateProducts($id,$marca,$talle,$precio,$id_categoria) {
+			$data = [
+			    'id' => $id,
+			    'marca' => $marca,
+			    'talle' => $talle,
+			    'precio' => $precio,
+				'id_categoria' => $id_categoria,
+			];
+
+
+		    $sql = "UPDATE productos SET marca=:marca, talle=:talle, precio=:precio, id_categoria=:id_categoria WHERE id_producto=:id ";
+		    $this->db->prepare($sql)->execute($data);
 		}
 	
 }

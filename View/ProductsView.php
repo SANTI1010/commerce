@@ -32,6 +32,22 @@ class ProductsView {
 		header("Location: ".BASE_URL."home");
 	}
 
+		function ShowHomeAdmin($products,$categorias) {
+		// inicializo Smarty y asigno las variables para mostrar
+		$smarty = new Smarty();
+		$smarty->assign('titulo',$this->title);
+		$smarty->assign('products', $products);
+		$smarty->assign('categorias', $categorias);
+		$smarty->display('templates/productsAdmin.tpl'); // muestro el template   
+	}
+
+
+	function ShowEditProducts($id) {
+		$smarty = new Smarty();
+		$smarty->assign('id', $id);
+		$smarty->display('templates/updateProducts.tpl'); // muestro el template   
+	}
+
 
 }
 

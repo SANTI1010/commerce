@@ -39,9 +39,6 @@ class ProductsController {
 	}
 
 	function Home() {
-		//chequeo session
-		//$this->checkLoggedIn();
-
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
 
@@ -51,6 +48,10 @@ class ProductsController {
 
 	function HomeAdmin() {
 		$this->checkLoggedIn();
+		$products = $this->model->GetProducts();
+		$categories = $this->modelCategories->GetCategories();
+
+		$this->view->ShowHomeAdmin($products, $categories);
 	}
 
 
@@ -64,7 +65,6 @@ class ProductsController {
 			$categoria = 2;
 		}
 
-
 		$this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$categoria);
 		$this->view->ShowHomeLocation();
 	}
@@ -74,6 +74,21 @@ class ProductsController {
 		$this->model->DeleteProducts($products_id);
 		$this->view->ShowHomeLocation();
 	}
+
+
+	function EditProducts($params = null){
+		$id = $params[':ID'];
+		$this->view->ShowEditProducts($id);
+	}
+
+	function UpdateProducts($params = null) {
+		$id = $params[':ID'];
+		$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['update_categoria']);
+		
+		header("Location:".BASE_URL."homeAdmin");
+	}
+
+
 
 
 	function DetalleProducts($params = null) {
@@ -93,23 +108,6 @@ class ProductsController {
 	function volver() {
 		$this->view->ShowHomeLocation();
 	}
-
-
-
-
-
-
-	/*
-	function MarkCompletedTask($params = null){
-		$products_id = $params[':ID'];
-
-		$this->model->MarkCompletedTask($products_id);
-		$this->view->ShowHomeLocation();
-	}
-	*/
-
-
-
 
 
 }

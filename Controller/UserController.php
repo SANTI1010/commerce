@@ -43,7 +43,7 @@ class UserController {
 					$_SESSION['LAST_ACTIVITY'] = time(); // actualiza el último instante de actividad
 
 
-					header("Location:".BASE_URL."home");
+					header("Location:".BASE_URL."homeAdmin");
 				}else{
 					$this->view->ShowLogin("Contraseña incorrecta");
 				}
