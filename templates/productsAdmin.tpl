@@ -7,7 +7,7 @@
 		<button type="button" class="btn btn-primary"><a class="btn-text" href="logout/">Logout</a></button>
 
   	<ul class="list-group">
-  		<h1 class="titulo">Agregar categoria</h1>
+  		<h1 class="titulo">Lista de items</h1>
       	{foreach from = $products item=product}
   			<li class="list-group-item list-group-item-success">{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="editProducts/{$product->id_producto}">Editar</a></button></li>      		
      	{/foreach}
@@ -17,6 +17,7 @@
 
 
 <div class="container">
+	<h1 class="titulo">Agregar items</h1>
 		      <form action="insert" method="post">
 		          <div class="form-group">
 		          	<label for="inputState">Categorias</label>

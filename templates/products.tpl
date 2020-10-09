@@ -28,39 +28,6 @@
 	{/foreach}
 
 </div>
-
-
-			<div class="container">
-		      <form action="insert" method="post">
-		          <div class="form-group">
-		          	<label for="inputState">Categorias</label>
-				      <select name="categoria" class="form-control">
-				      	<option id="optionOculto" value="0"  hidden>--Seleccionar--</option>
-					    {foreach from = $categorias item=categoria}
-						    <option value="{$categoria->id_categoria}">{$categoria->nombre}</option>
-						{/foreach}
-				      </select>
-		            <label for="marca">Marca</label>
-		            <input class="form-control" id="marca" name="input_marca" aria-describedby="emailHelp">
-		            <small id="emailHelp" class="form-text text-muted">Titulo de la Tarea</small>
-		          </div>
-		          <div class="form-group">
-		            <label for="description">Talle</label>
-		            <input class="form-control" id="description" name="input_talle">
-		          </div>
-		          <div class="form-group">
-		              <label for="priority">Precio</label>
-		              <input class="form-control" id="priority" name="input_precio">
-		            </div>
-		          
-		          <button type="submit" class="btn btn-primary">Agregar</button>
-		        </form>
-		    </div>
-
-
-
-
-
 	<section>
 		<div class="contenedor">
 			<h2 class="barraProductos">Productos</h2>

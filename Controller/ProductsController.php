@@ -66,33 +66,31 @@ class ProductsController {
 		}
 
 		$this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$categoria);
-		$this->view->ShowHomeLocation();
+		header("Location:".BASE_URL."homeAdmin");
 	}
 	
 	function DeleteProducts($params = null){
 		$products_id = $params[':ID'];
 		$this->model->DeleteProducts($products_id);
-		$this->view->ShowHomeLocation();
+		header("Location:".BASE_URL."homeAdmin");
 	}
 
 
 	function EditProducts($params = null){
 		$id = $params[':ID'];
-		$this->view->ShowEditProducts($id);
+		$categories = $this->modelCategories->GetCategories();
+		$this->view->ShowEditProducts($id,$categories);
 	}
 
 	function UpdateProducts($params = null) {
 		$id = $params[':ID'];
-		$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['update_categoria']);
-		
+		$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria']);
+
 		header("Location:".BASE_URL."homeAdmin");
 	}
 
-
-
-
 	function DetalleProducts($params = null) {
-		$this->checkLoggedIn();
+	//	$this->checkLoggedIn();
 		$id = $params[':ID'];
 		$detalle = $this->model->DetalleProducts($id);
 		$this->view->ShowDetalle($detalle);

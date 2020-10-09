@@ -38,14 +38,15 @@ class ProductsView {
 		$smarty->assign('titulo',$this->title);
 		$smarty->assign('products', $products);
 		$smarty->assign('categorias', $categorias);
-		$smarty->display('templates/productsAdmin.tpl'); // muestro el template   
+		$smarty->display('templates/productsAdmin.tpl');   
 	}
 
 
-	function ShowEditProducts($id) {
+	function ShowEditProducts($id,$categorias) {
 		$smarty = new Smarty();
 		$smarty->assign('id', $id);
-		$smarty->display('templates/updateProducts.tpl'); // muestro el template   
+		$smarty->assign('categorias', $categorias);
+		$smarty->display('templates/updateProducts.tpl');   
 	}
 
 
