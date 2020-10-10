@@ -57,15 +57,7 @@ class ProductsController {
 
 
 	function InsertProducts() {
-		$categoria = $_POST['categoria'];
-
-		if($categoria == 1) {
-			$categoria = 1;
-		} else {
-			$categoria = 2;
-		}
-
-		$this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$categoria);
+		$this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria']);
 		header("Location:".BASE_URL."homeAdmin");
 	}
 	

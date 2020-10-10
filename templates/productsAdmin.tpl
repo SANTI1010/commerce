@@ -13,11 +13,13 @@
      	{/foreach}
  	</ul>
 
+ 
+
 </div>
 
 
-<div class="container">
-	<h1 class="titulo">Agregar items</h1>
+		<div class="container">
+			<h1 class="titulo">Agregar items</h1>
 		      <form action="insert" method="post">
 		          <div class="form-group">
 		          	<label for="inputState">Categorias</label>
@@ -29,7 +31,6 @@
 				      </select>
 		            <label for="marca">Marca</label>
 		            <input class="form-control" id="marca" name="input_marca" aria-describedby="emailHelp">
-		            <small id="emailHelp" class="form-text text-muted">Titulo de la Tarea</small>
 		          </div>
 		          <div class="form-group">
 		            <label for="description">Talle</label>
@@ -42,8 +43,30 @@
 		          
 		          <button type="submit" class="btn btn-primary">Agregar</button>
 		        </form>
-		    </div>
+		</div>
 
+	<div class="container">
+		<ul class="list-group">
+	  		<h1 class="titulo">Lista de categorias</h1>
+	      	{foreach from = $categorias item=categoria}
+	  			<li class="list-group-item list-group-item-success">{$categoria->nombre}<button type="button" class="btn btn-danger"> <a href="deleteCategories/{$categoria->id_categoria}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="editCategories/{$categoria->id_categoria}">Editar</a></button></li>      		
+	     	{/foreach}
+	 	</ul>
+ 	</div>
+ 	<div class="container">
+			<h1 class="titulo">Agregar Categorias</h1>
+		      <form action="insertCategories" method="post">
+		          <div class="form-group">
+		         
+		            <label for="categoria">Nombre de nueva categoria</label>
+		            <input class="form-control" id="categoria" name="input_categoria">
+		          
+		          </div>
+		 
+		          
+		          <button type="submit" class="btn btn-primary">Agregar</button>
+		        </form>
+		</div>
 
 
 

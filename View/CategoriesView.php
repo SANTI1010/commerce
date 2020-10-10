@@ -17,6 +17,12 @@ class CategoriesView {
 		$smarty->display('templates/categories.tpl'); // muestro el template   
 	}
 
+		function ShowEditCategories($id) {
+		$smarty = new Smarty();
+		$smarty->assign('id', $id);
+		$smarty->display('templates/updateCategories.tpl');   
+	}
+
 }
 
 ?>
