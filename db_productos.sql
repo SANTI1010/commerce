@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-09-2020 a las 19:22:56
+-- Tiempo de generación: 12-10-2020 a las 00:55:16
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.3.19
 
@@ -37,8 +37,8 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id_categoria`, `nombre`) VALUES
-(1, 'Rodilleras'),
-(2, 'Mangas');
+(7, 'Mangas grandes'),
+(8, 'Rodillera');
 
 -- --------------------------------------------------------
 
@@ -59,8 +59,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `marca`, `talle`, `precio`, `id_categoria`) VALUES
-(22, 'Adidas', '', 0, 1),
-(23, 'Gaelle', 'L', 1500, 1);
+(54, 'Diadora', 'S', 5600, 7);
 
 -- --------------------------------------------------------
 
@@ -71,8 +70,16 @@ INSERT INTO `productos` (`id_producto`, `marca`, `talle`, `precio`, `id_categori
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `password` varchar(12) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `rol` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `password`, `rol`) VALUES
+(1, 'admin', '$2y$12$vcP6PqTDVHRswJcqzpIpwu5LEbs3TT8hO6ZzppzPQIuXOgcBlW5Ta', 'admin');
 
 --
 -- Índices para tablas volcadas
@@ -106,19 +113,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
