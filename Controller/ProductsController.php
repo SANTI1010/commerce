@@ -41,7 +41,6 @@ class ProductsController {
 	function Home() {
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
-
 		$this->view->ShowHome($products, $categories);
 	}
 
@@ -50,10 +49,8 @@ class ProductsController {
 		$this->checkLoggedIn();
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
-
 		$this->view->ShowHomeAdmin($products, $categories);
 	}
-
 
 
 	function InsertProducts() {

@@ -1,6 +1,5 @@
 {include file="header.tpl"}
 		    
-	
 
 	<div class="container">
 
@@ -9,15 +8,14 @@
   	<ul class="list-group">
   		<h1 class="titulo">Lista de items</h1>
       	{foreach from = $products item=product}
-  			<li class="list-group-item list-group-item-success">{$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="editProducts/{$product->id_producto}">Editar</a></button></li>      		
+  			<li class="list-group-item list-group-item-success"><p>La categoria es {$product->nombre}</p> {$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> 
+  			 <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="editProducts/{$product->id_producto}">Editar</a></button></li>      		
      	{/foreach}
  	</ul>
 
  
 
 </div>
-
-
 		<div class="container">
 			<h1 class="titulo">Agregar items</h1>
 		      <form action="insert" method="post">
@@ -68,8 +66,4 @@
 		        </form>
 		</div>
 
-
-
-
-{include file="footer.tpl"}		
 
