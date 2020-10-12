@@ -786,8 +786,15 @@ a:hover {
 }
 
 
-#logout {
-	background-color: green;
+.logout {
 	position: absolute;
  	left: 73%;
+ 	color: yellow;
+}
+
+.login {
+	background-color: green;
+	position: absolute;
+ 	left: 73%;	
+ 	
 }

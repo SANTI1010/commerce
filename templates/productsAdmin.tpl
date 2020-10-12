@@ -3,7 +3,7 @@
 
 	<div class="container">
 
-		<button type="button" class="btn btn-primary"><a class="btn-text" href="logout/">Logout</a></button>
+		<button type="button" class="btn btn-primary logout"><a class="btn-text" href="logout/">Logout</a></button>
 
   	<ul class="list-group">
   		<h1 class="titulo">Lista de items</h1>

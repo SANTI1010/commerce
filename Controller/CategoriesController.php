@@ -2,16 +2,20 @@
 
 require_once "./View/CategoriesView.php";
 require_once "./Model/CategoriesModel.php";
+require_once "./Helpers/Helper.php";
 
 
 class CategoriesController {
 
 	private $view;
 	private $model;
+	private $authHelper;
 
 	function __construct(){
 		$this->view = new CategoriesView();
 		$this->model = new CategoriesModel();
+		$this->$authHelper = new AuthHelper();
+		$authHelper->checkLoggedIn();
 	}
 
 

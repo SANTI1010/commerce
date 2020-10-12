@@ -31,7 +31,7 @@ class ProductsModel {
 
 				//Detallar
 		function DetalleProducts($id){
-		    $sentencia = $this->db->prepare("SELECT * FROM productos WHERE id_producto=?");
+		    $sentencia = $this->db->prepare("SELECT * FROM productos INNER JOIN categorias ON productos.id_categoria = categorias.id_categoria WHERE id_producto=?");
 		    $sentencia->execute(array($id));
 		    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
 		}
