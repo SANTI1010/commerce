@@ -27,7 +27,6 @@ class CategoriesModel {
 	    $sentencia->execute(array($nameCategorie));
 	}
 
-
 	//Borrar
 	function DeleteCategories($categorie_id) {
 	    $sentencia = $this->db->prepare("DELETE FROM categorias WHERE id_categoria=?");

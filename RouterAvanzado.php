@@ -32,7 +32,6 @@ $r->addRoute("delete/:ID","GET","ProductsController","DeleteProducts");
 $r->addRoute("editProducts/:ID","GET","ProductsController","EditProducts");
 $r->addRoute("updateProducts/:ID","POST","ProductsController","UpdateProducts");
 
-
 $r->addRoute("insertCategories","POST","CategoriesController","InsertCategories");
 $r->addRoute("deleteCategories/:ID","GET","CategoriesController","DeleteCategories");
 $r->addRoute("editCategories/:ID","GET","CategoriesController","EditCategories");
