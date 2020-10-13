@@ -22,17 +22,17 @@ class Helper {
 	}
 
 	public function checkLoggedIn(){
-	session_start();
-	if(!isset($_SESSION["NOMBRE"])){
-		header("Location:".LOGIN);
-		die();//corto toda la ejecucion
-	}else{
-		if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) { 
-			header("Location:".LOGOUT);
+		session_start();
+		if(!isset($_SESSION["NOMBRE"])){
+			header("Location:".LOGIN);
 			die();//corto toda la ejecucion
-		} 
+		}else{
+			if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) { 
+				header("Location:".LOGOUT);
+				die();//corto toda la ejecucion
+			} 
+		}
 	}
-}
 
 }
 

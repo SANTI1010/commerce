@@ -12,14 +12,14 @@ class ProductsController {
 	private $model;
 	private $modelCategories;
 	private $viewCategories;
-	private $authHelper;
+	private $helper;
 
 	function __construct(){
 		$this->view = new ProductsView();
 		$this->model = new ProductsModel();
 		$this->modelCategories = new CategoriesModel();
 		$this->viewCategories = new CategoriesView();
-		$this->authHelper = new Helper();
+		$this->helper = new Helper();
 	}
 
 
@@ -31,7 +31,7 @@ class ProductsController {
 
 
 	function HomeAdmin() {
-		$this->authHelper->checkLoggedIn();
+		$this->helper->checkLoggedIn();
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
 		$this->view->ShowHomeAdmin($products, $categories);
@@ -39,13 +39,13 @@ class ProductsController {
 
 
 	function InsertProducts() {
-		$this->authHelper->checkLoggedIn();
+		$this->helper->checkLoggedIn();
 		$this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria']);
 		header("Location:".BASE_URL."homeAdmin");
 	}
 	
 	function DeleteProducts($params = null){
-		$this->authHelper->checkLoggedIn();
+		$this->helper->checkLoggedIn();
 		$products_id = $params[':ID'];
 		$this->model->DeleteProducts($products_id);
 		header("Location:".BASE_URL."homeAdmin");
@@ -53,7 +53,7 @@ class ProductsController {
 
 
 	function EditProducts($params = null){
-		$this->authHelper->checkLoggedIn();
+		$this->helper->checkLoggedIn();
 		$id = $params[':ID'];
 		$categories = $this->modelCategories->GetCategories();
 		$product = $this->model->GetProductById($id);
