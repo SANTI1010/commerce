@@ -40,11 +40,11 @@ class ProductsView {
 	}
 
 
-	function ShowEditProducts($id,$categorias) {
-		var_dump($categorias);
+	function ShowEditProducts($id,$categorias,$product) {
 		$smarty = new Smarty();
 		$smarty->assign('id', $id);
 		$smarty->assign('categorias', $categorias);
+		$smarty->assign('product', $product);
 		$smarty->display('templates/updateProducts.tpl');   
 	}
 

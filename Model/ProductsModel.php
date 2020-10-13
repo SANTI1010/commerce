@@ -17,6 +17,12 @@ class ProductsModel {
 		    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
 		}
 
+		function GetProductById($id) {
+			$sentencia = $this->db->prepare("SELECT * FROM productos WHERE id_producto=?");
+		    $sentencia->execute(array($id));
+		    return $sentencia->fetch(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
+		}
+
 		//Insertar
 		function InsertProducts($marca,$talle,$precio,$id_categoria){
 		    $sentencia = $this->db->prepare("INSERT INTO productos(marca,talle,precio,id_categoria) VALUES (?,?,?,?)");

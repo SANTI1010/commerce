@@ -1,4 +1,6 @@
 {include file="header.tpl"}
+
+
 	
 			<div class="container">
 		      <form action="updateProducts/{$id}" method="post">

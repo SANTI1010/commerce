@@ -51,11 +51,13 @@ class ProductsController {
 		header("Location:".BASE_URL."homeAdmin");
 	}
 
+
 	function EditProducts($params = null){
 		$this->authHelper->checkLoggedIn();
 		$id = $params[':ID'];
 		$categories = $this->modelCategories->GetCategories();
-		$this->view->ShowEditProducts($id,$categories);
+		$product = $this->model->GetProductById($id);
+		$this->view->ShowEditProducts($id,$categories,$product);
 	}
 
 	function UpdateProducts($params = null) {
