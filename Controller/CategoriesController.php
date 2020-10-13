@@ -19,7 +19,7 @@ class CategoriesController {
 	}
 
 	function GetCategories(){
-		$categories = $this->model->GetCategories($categorie);
+		$categories = $this->model->GetCategories();
 		$this->view->ShowCategories($categories);
 	}
 
@@ -38,7 +38,8 @@ class CategoriesController {
 
 	function EditCategories($params = null){
 		$id = $params[':ID'];
-		$this->view->ShowEditCategories($id);
+		$categories = $this->model->GetCategoriesById($id);
+		$this->view->ShowEditCategories($categories);
 	}
 
 	function UpdateCategories($params = null) {
