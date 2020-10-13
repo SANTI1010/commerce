@@ -19,7 +19,7 @@
   		<h1 class="titulo">Listado de items</h1>
       	{foreach from = $products item=product}
         
-  			<li class="list-group-item list-group-item-success"><p>La categoria es {$product->nombre}</p>{$product->marca} <span class="badge badge-primary badge-pill">{$product->talle}</span> <button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
+  			<li class="list-group-item list-group-item-success"><p>La categoria es {$product->nombre}</p>{$product->marca} <button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
      	{/foreach}
  	</ul>
 

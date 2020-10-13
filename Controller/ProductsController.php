@@ -51,7 +51,6 @@ class ProductsController {
 		header("Location:".BASE_URL."homeAdmin");
 	}
 
-
 	function EditProducts($params = null){
 		$this->authHelper->checkLoggedIn();
 		$id = $params[':ID'];
@@ -60,7 +59,7 @@ class ProductsController {
 	}
 
 	function UpdateProducts($params = null) {
-		$this->authHelper->checkLoggedIn();
+		$this->helper->checkLoggedIn();
 		$id = $params[':ID'];
 		$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria']);
 

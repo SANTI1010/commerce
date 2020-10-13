@@ -41,6 +41,7 @@ class ProductsView {
 
 
 	function ShowEditProducts($id,$categorias) {
+		var_dump($categorias);
 		$smarty = new Smarty();
 		$smarty->assign('id', $id);
 		$smarty->assign('categorias', $categorias);

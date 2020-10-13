@@ -9,15 +9,14 @@ class CategoriesController {
 
 	private $view;
 	private $model;
-	private $authHelper;
+	private $helper;
 
 	function __construct(){
 		$this->view = new CategoriesView();
 		$this->model = new CategoriesModel();
-		$this->$authHelper = new AuthHelper();
-		$authHelper->checkLoggedIn();
+		$this->helper = new Helper();
+		$this->helper->checkLoggedIn();
 	}
-
 
 	function GetCategories(){
 		$categories = $this->model->GetCategories($categorie);

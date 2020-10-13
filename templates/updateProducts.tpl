@@ -10,10 +10,8 @@
 						    <option value="{$categoria->id_categoria}">{$categoria->nombre}</option>
 						{/foreach}
 				      </select>
-		           
 		            <label for="marca">Marca</label>
-		            <input class="form-control" id="marca" name="update_marca" aria-describedby="emailHelp">
-		         
+		            <input class="form-control" id="marca" value="{$categorias->marca}" name="update_marca" aria-describedby="emailHelp">		         
 		          </div>
 		          <div class="form-group">
 		            <label for="description">Talle</label>
