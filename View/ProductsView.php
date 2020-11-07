@@ -48,6 +48,12 @@ class ProductsView {
 		$smarty->display('templates/updateProducts.tpl');   
 	}
 
+	function showError($msj){
+		$smarty = new Smarty();
+		$smarty->assign('msj', $msj);
+		$smarty->display('templates/msjError.tpl');
+	}
+
 
 }
 

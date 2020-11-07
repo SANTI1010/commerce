@@ -40,8 +40,12 @@ class ProductsController {
 
 	function InsertProducts() {
 		$this->helper->checkLoggedIn();
-		$this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria']);
-		header("Location:".BASE_URL."homeAdmin");
+		$success = $this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria']);
+		if($success)
+			header("Location:".BASE_URL."homeAdmin");
+		else
+			$this->view->showError("No se pudo insertar la tarea correctamente");
+		
 	}
 	
 	function DeleteProducts($params = null){

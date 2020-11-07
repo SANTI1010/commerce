@@ -6,7 +6,14 @@ class ProductsModel {
 
 	function __construct() {
 
-		$this->db = new PDO('mysql:host=localhost;'.'dbname=db_productos;charset=utf8', 'root', ''); 
+		try {
+			$this->db = new PDO('mysql:host=localhost;'.'dbname=db_productos;charset=utf8', 'root', ''); 
+			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+
+		} catch(Exception $e) {
+			var_dump($e);
+		}
+		return $this->db;
 
 	}	
 
@@ -26,7 +33,7 @@ class ProductsModel {
 		//Insertar
 		function InsertProducts($marca,$talle,$precio,$id_categoria){
 		    $sentencia = $this->db->prepare("INSERT INTO productos(marca,talle,precio,id_categoria) VALUES (?,?,?,?)");
-		    $sentencia->execute(array($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$id_categoria));
+		    return $sentencia->execute(array($marca,$talle,$precio,$id_categoria));
 		}
 
 		//Borrar
