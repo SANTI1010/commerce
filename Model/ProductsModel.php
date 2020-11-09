@@ -33,13 +33,15 @@ class ProductsModel {
 		//Insertar
 		function InsertProducts($marca,$talle,$precio,$id_categoria){
 		    $sentencia = $this->db->prepare("INSERT INTO productos(marca,talle,precio,id_categoria) VALUES (?,?,?,?)");
-		    return $sentencia->execute(array($marca,$talle,$precio,$id_categoria));
+		    $sentencia->execute(array($marca,$talle,$precio,$id_categoria));
+		    return $this->db->lastInsertId();
 		}
 
 		//Borrar
 		function DeleteProducts($product_id) {
 		    $sentencia = $this->db->prepare("DELETE FROM productos WHERE id_producto=?");
 		    $sentencia->execute(array($product_id));
+		    return $sentencia->rowCount();//me dice cuantas filas toco
 		}
 
 				//Detallar
@@ -59,17 +61,9 @@ class ProductsModel {
 
 		//Actualizar
 		function UpdateProducts($id,$marca,$talle,$precio,$id_categoria) {
-			$data = [
-			    'id' => $id,
-			    'marca' => $marca,
-			    'talle' => $talle,
-			    'precio' => $precio,
-				'id_categoria' => $id_categoria,
-			];
-
-
-		    $sql = "UPDATE productos SET marca=:marca, talle=:talle, precio=:precio, id_categoria=:id_categoria WHERE id_producto=:id ";
-		    $this->db->prepare($sql)->execute($data);
+		    $sentencia = $this->db->prepare("UPDATE productos SET marca=?, talle=?, precio=?, id_categoria=? WHERE id_producto=? ");
+		    $sentencia->execute(array($marca,$talle,$precio,$id_categoria,$id));
+		    return $sentencia->rowCount();
 		}
 	
 }

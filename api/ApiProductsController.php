@@ -32,21 +32,46 @@ class ApiProductsController extends ApiController {
 	}
 
 
-	public function DeleteProducts($params = null) {
+	public function deleteProducts($params = null) {
 		$products_id = $params[':ID'];
-		$products = $this->model->DeleteProducts($products_id);	
+		$result = $this->model->DeleteProducts($products_id);	
+
+		if ($result > 0)  //viene del rowCount y toca alguna
+			$this->view->response('La tarea se borro correctamente',200);
+		else
+			//404
+			$this->view->response('La tarea no existe',404);	
+
 	}
 
-	public function InsertProducts($params = null) {
+	public function insertProducts($params = null) {
 		//traer la data desde el body postman
 		$body = $this->getData();
-		$products = $this->model->InsertProducts($body->marca, $body->talle,$body->precio,$body->id_categoria);	
+		$idProducts = $this->model->InsertProducts($body->marca, $body->talle,$body->precio,$body->id_categoria);	
 
-		if ($products)  //puede ser distinto de false
-			$this->view->response('Anduvo',200);
+		if ($idProducts)  //puede ser distinto de false
+			$this->view->response($this->model->GetProductById($idProducts),200);
 		else
 			//404
 			$this->view->response('La tarea no se agrego',404);	
+	}
+
+	public function updateProducts($params = null) {
+		$body = $this->getData();
+		$id = $params[':ID'];
+
+		$product = $this->model->GetProductById($id);
+		if(empty($product)) { //si esta vacia
+			$this->view->response("El producto con id= ".$id." no existe",404);
+		} else {
+			$result = $this->model->UpdateProducts($id,$body->marca,$body->talle,$body->precio,$body->id_categoria);
+			if ($result > 0) {
+				$this->view->response('Se actualizo',200);
+				$this->view->response($this->model->GetProductById($id),200);
+			} else {
+				$this->view->response('La tarea no se actualizo',404);	
+			}
+		}
 
 	}
 

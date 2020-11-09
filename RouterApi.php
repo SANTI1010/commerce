@@ -12,9 +12,11 @@ $router->addRoute('products','GET', 'ApiProductsController','getProducts');
 
 $router->addRoute('products/:ID','GET', 'ApiProductsController','getProductsID');
 
-$router->addRoute('products/:ID','DELETE', 'ApiProductsController','DeleteProducts');
+$router->addRoute('products/:ID','DELETE', 'ApiProductsController','deleteProducts');
 
-$router->addRoute('products/','POST', 'ApiProductsController','InsertProducts');
+$router->addRoute('products/','POST', 'ApiProductsController','insertProducts');
+
+$router->addRoute('products/:ID','PUT', 'ApiProductsController','updateProducts');
 
 
 //run
