@@ -10,8 +10,7 @@ require_once('RouterClass.php');
 define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
 define("LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/login');
 define("LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/logout');
-
-
+define("LOGUEARME", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/loguearme');
 
 
 $r = new Router();
@@ -24,6 +23,8 @@ $r->addRoute("homeAdmin","GET","ProductsController","HomeAdmin");
 $r->addRoute("login","GET","UserController","ShowLogin");
 $r->addRoute("verifyUser","POST","UserController","VerifyUser");
 $r->addRoute("logout","GET","UserController","Logout");
+$r->addRoute("loguearme","GET","UserController","ShowLoguearme");
+$r->addRoute("UserLoguedIn","POST","UserController","UserLoguedIn");
 
 
 //El insert lo veo en TasksView
@@ -37,6 +38,8 @@ $r->addRoute("deleteCategories/:ID","GET","CategoriesController","DeleteCategori
 $r->addRoute("editCategories/:ID","GET","CategoriesController","EditCategories");
 $r->addRoute("updateCategories/:ID","POST","CategoriesController","UpdateCategories");
 
+//ejemplo de CSR
+$r->addRoute("products-csr","GET","ProductsController","ProductsCSR");
 
 
 $r->addRoute("detalle/:ID","GET","ProductsController","DetalleProducts");
@@ -51,7 +54,7 @@ $r->addRoute("volver","GET","ProductsController","volver");
 
 
 //Ruta por defecto
-$r->setDefaultRoute("ProductsController","Home");
+$r->setDefaultRoute("UserController","ShowLogin");
 
 //run
 $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']);

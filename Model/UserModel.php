@@ -16,6 +16,20 @@ class UserModel {
 	}
 
 
+
+	function insertUser($user,$pass) {
+		$hash = password_hash($pass, PASSWORD_DEFAULT);
+
+		$sentencia = $this->db->prepare("INSERT INTO usuarios(nombre,password,rol) VALUES (?,?,?)");
+		$sentencia->execute(array($user,$hash,0));
+		return $this->db->lastInsertId();
+		
+
+
+	}
+
+
+
 			/*********************/
 			/*Registro de usuario*/
 			/*********************/

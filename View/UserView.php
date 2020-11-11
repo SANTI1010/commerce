@@ -16,6 +16,15 @@ class UserView {
 
 		$smarty->display('templates/login.tpl'); // muestro el template 		
 	}
+
+
+		function ShowLoguearme($message = ""){
+		$smarty = new Smarty();
+		$smarty->assign('titulo',$this->title);
+		$smarty->assign('message',$message);
+
+		$smarty->display('templates/loguearme.tpl'); // muestro el template 		
+	}
 }
 
 ?>

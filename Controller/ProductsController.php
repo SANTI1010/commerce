@@ -24,6 +24,7 @@ class ProductsController {
 
 
 	function Home() {
+		$this->helper->checkLoggedIn();
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
 		$this->view->ShowHome($products, $categories);
@@ -45,7 +46,7 @@ class ProductsController {
 			header("Location:".BASE_URL."homeAdmin");
 		else
 			$this->view->showError("No se pudo insertar la tarea correctamente");
-		
+
 	}
 	
 	function DeleteProducts($params = null){
@@ -87,6 +88,11 @@ class ProductsController {
 
 	function volver() {
 		$this->view->ShowHomeLocation();
+	}
+
+
+	function ProductsCSR(){
+		$this->view->ShowProductsCSR();
 	}
 
 

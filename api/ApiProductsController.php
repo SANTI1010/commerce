@@ -50,7 +50,7 @@ class ApiProductsController extends ApiController {
 		$idProducts = $this->model->InsertProducts($body->marca, $body->talle,$body->precio,$body->id_categoria);	
 
 		if ($idProducts)  //puede ser distinto de false
-			$this->view->response($this->model->GetProductById($idProducts),200);
+			$this->view->response($this->model->GetProductById($idProducts),201);
 		else
 			//404
 			$this->view->response('La tarea no se agrego',404);	

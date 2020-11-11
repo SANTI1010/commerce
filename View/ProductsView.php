@@ -55,6 +55,12 @@ class ProductsView {
 	}
 
 
+	function ShowProductsCSR() {
+		$smarty = new Smarty();
+		$smarty->display('templates/productsCSR.tpl');
+	}
+
+
 }
 
 ?>

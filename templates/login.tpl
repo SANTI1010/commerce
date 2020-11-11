@@ -23,6 +23,8 @@
 	    </div>
 	  </div>
 	  <button type="submit" class="btn btn-primary">Ingresar</button>
+
+	  <button class="btn btn-secondary"><a class="btn-text" href="loguearme/">Registrarme</a></button>
 	</form>	 
 </div>   
 	

@@ -1,5 +1,6 @@
 {include file="header.tpl"}
-	<button type="button" class="btn login"><a class="btn-text" href="login/">Login</a></button>
+	<button type="button" class="btn login"><a class="btn-text" href="login/">Login</a></button><br>
+    <button type="button" class="btn login"><a class="btn-text" href="products-csr/">csr</a></button>
 	<section>
 		<div class="contenedor">
 			<h1 class="titulo">Especialista en Voleyball</h1>
