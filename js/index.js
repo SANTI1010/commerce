@@ -12,7 +12,7 @@ function init() {
     let btnValidar = document.getElementById("btnValidar");
 
     //Cuando saco el foco del input hace el evento blur.
-    nombre.addEventListener("blur",validarNombre);
+    /*nombre.addEventListener("blur",validarNombre);
     email.addEventListener("blur",validarEmail);
     direccion.addEventListener("blur",validarDireccion);
     telefono.addEventListener("blur",validarTelefono);
@@ -21,7 +21,7 @@ function init() {
         event.preventDefault();
         validar();
     })
-
+*/
 
 function validarNombre() {
     let valorNombre = nombre.value;

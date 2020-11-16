@@ -5,6 +5,7 @@ require_once "./Model/ProductsModel.php";
 require_once "./Model/CategoriesModel.php";
 require_once "./View/CategoriesView.php";
 require_once "./Helpers/Helper.php";
+require_once "./Model/UserModel.php";
 
 class ProductsController {
 
@@ -13,6 +14,7 @@ class ProductsController {
 	private $modelCategories;
 	private $viewCategories;
 	private $helper;
+	private $modelUsers;
 
 	function __construct(){
 		$this->view = new ProductsView();
@@ -20,6 +22,8 @@ class ProductsController {
 		$this->modelCategories = new CategoriesModel();
 		$this->viewCategories = new CategoriesView();
 		$this->helper = new Helper();
+		$this->modelUsers = new UserModel();
+
 	}
 
 
@@ -35,7 +39,12 @@ class ProductsController {
 		$this->helper->checkLoggedIn();
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
-		$this->view->ShowHomeAdmin($products, $categories);
+		$users = $this->modelUsers->getUsers();
+
+		if(isset($products) && $products != '' && isset($categories) && $categories != '' && isset($users) && $users != '')
+			$this->view->ShowHomeAdmin($products, $categories,$users);
+		else
+			echo "No hay productos";
 	}
 
 

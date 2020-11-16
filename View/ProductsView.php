@@ -32,10 +32,11 @@ class ProductsView {
 		header("Location: ".BASE_URL."home");
 	}
 
-	function ShowHomeAdmin($products,$categorias) {
+	function ShowHomeAdmin($products,$categorias,$users) {
 		$smarty = new Smarty();
 		$smarty->assign('products', $products);
 		$smarty->assign('categorias', $categorias);
+		$smarty->assign('users', $users);
 		$smarty->display('templates/productsAdmin.tpl');   
 	}
 

@@ -26,6 +26,8 @@ $r->addRoute("logout","GET","UserController","Logout");
 $r->addRoute("loguearme","GET","UserController","ShowLoguearme");
 $r->addRoute("UserLoguedIn","POST","UserController","UserLoguedIn");
 
+$r->addRoute("UsersPermits","POST","UserController","UsersPermits");
+
 
 //El insert lo veo en TasksView
 $r->addRoute("insert","POST","ProductsController","InsertProducts");

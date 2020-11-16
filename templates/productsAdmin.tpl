@@ -5,15 +5,36 @@
 
 		<button type="button" class="btn btn-primary logout"><a class="btn-text" href="logout/">Logout</a></button>
 
-  	<ul class="list-group">
-  		<h1 class="titulo">Lista de items</h1>
-      	{foreach from = $products item=product}
-  			<li class="list-group-item list-group-item-success"><p>La categoria es {$product->nombre}</p> {$product->marca}<span class="badge badge-primary badge-pill">{$product->talle}</span> 
-  			 <button type="button" class="btn btn-danger"> <a href="delete/{$product->id_producto}">Borrar</a></button><button type="button" class="btn btn-warning"> <a href="editProducts/{$product->id_producto}">Editar</a></button></li>      		
-     	{/foreach}
- 	</ul>
 
- 
+	<div class="container">
+		<h1>Dar permisos</h1>
+		<form action="UsersPermits" method="post">
+			<div class="row align-items-end">
+				<div class="col-md-6">
+					<select name="userNombre" class="form-control">
+				      	<option value="0"  hidden>--Seleccionar--</option>
+					    {foreach from = $users item=user}
+						    <option>{$user->nombre}</option>
+						{/foreach}
+				    </select>
+			    </div>
+			    <div class="col-md-2 form-check-inline">
+		  			<label class="col-md-6 form-check-inline">
+		    			<input type="radio" class="form-check-input" value="admin" name="radioPermiso">Admin
+		  			</label>
+				</div>
+				<div class="col-md-2 form-check-inline">
+		  			<label class="col-md-6 form-check-inline">
+		    			<input type="radio" class="form-check-input" value="user" name="radioPermiso">User
+		  			</label>
+				</div>
+
+		    </div>
+
+			<button type="submit" class="btn btn-primary">Confirmar cambios</button>
+		</form>	  
+	</div>
+
 
 </div>
 		<div class="container">
@@ -41,7 +62,7 @@
 		          
 		          <button type="submit" class="btn btn-primary">Agregar</button>
 		        </form>
-		</div>
+		</div>	
 
 	<div class="container">
 		<ul class="list-group">

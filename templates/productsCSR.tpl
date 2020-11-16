@@ -16,6 +16,8 @@
 		</div>
 
 	</div>
+
+	<div class="mensajes"></div>
 </div>
 	
 

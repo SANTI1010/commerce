@@ -23,11 +23,8 @@ class UserController {
 	}
 
 	public function UserLoguedIn() {
-		if(empty($_POST['input_user_log']) && empty($_POST['input_pass_log'])){
-			//No existe el user en la DB
-			$this->view->ShowLogin("El usuario o Contraseña estan vacios");
-			die();
-		}
+
+		if($_POST['input_user_log'] != "" && $_POST['input_pass_log'] != "" ){
 
 			$user_log = $_POST['input_user_log'];
 			$pass_log = $_POST['input_pass_log'];
@@ -36,19 +33,24 @@ class UserController {
 				$insertUserDB = $this->model->insertUser($user_log,$pass_log);		
 			}
 
-			$userFromDB = $this->model->GetUser($user_log);
+			if(!empty($insertUserDB)) {
 
-			if(isset($userFromDB) && $userFromDB){ //existe y es true.
-					$this->authHelper->Login($userFromDB);
-					header("Location:".BASE_URL."home");	
-			}else{
-				//No existe el user en la DB
-				$this->view->ShowLogin("El usuario no existe");
+				$userFromDB = $this->model->GetUser($user_log);
+
+				if(isset($userFromDB) && $userFromDB){ //existe y es true.
+						$this->authHelper->Login($userFromDB);
+						header("Location:".BASE_URL."home");	
+				}else{
+					//No existe el user en la DB
+					$this->view->ShowLogin("El usuario no existe");
+				}
+			}else {
+				echo "No se inserto correctamente";
 			}	
-			
-			
+		}	 else {
+			$this->view->ShowLogin("El usuario o Contraseña estan vacios");
+		}				
 	}
-
 
 	public function VerifyUser() {
 		if(empty($_POST['input_user']) && empty($_POST['input_pass'])){
@@ -72,8 +74,6 @@ class UserController {
 					}else {
 						header("Location:".BASE_URL."home");
 					}
-
-					
 				}else{
 					$this->view->ShowLogin("Contraseña incorrecta");
 				}
@@ -83,6 +83,24 @@ class UserController {
 			}
 		}
 	}
+
+
+	public function UsersPermits() {
+		if(empty($_POST['userNombre']) && empty($_POST['radioPermiso'])){
+			$this->view->ShowError("Error");
+			die();
+		}else{
+			$userNombre = $_POST['userNombre'];
+			$newRol = $_POST['radioPermiso'];
+		}
+
+		$updatePermits = $this->model->updatePermits($userNombre,$newRol);		
+		
+	}
+
+
+
+
 
 	public function ShowLoguearme() {
 		$this->view->ShowLoguearme();
