@@ -25,6 +25,12 @@ class UserView {
 
 		$smarty->display('templates/loguearme.tpl'); // muestro el template 		
 	}
+
+	function showError($msj){
+		$smarty = new Smarty();
+		$smarty->assign('msj', $msj);
+		$smarty->display('templates/msjError.tpl');
+	}
 }
 
 ?>

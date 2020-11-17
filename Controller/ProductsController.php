@@ -54,7 +54,7 @@ class ProductsController {
 		if($success)
 			header("Location:".BASE_URL."homeAdmin");
 		else
-			$this->view->showError("No se pudo insertar la tarea correctamente");
+			$this->helper->showError("No se pudo insertar la tarea correctamente");
 
 	}
 	

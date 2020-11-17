@@ -95,10 +95,28 @@ class UserController {
 		}
 
 		$updatePermits = $this->model->updatePermits($userNombre,$newRol);		
+
+		if(isset($updatePermits) && $updatePermits == 1) {
+			$this->view->ShowError("La actualizacion se realizo correctamente");
+		} else {
+			echo "Error al actualizar";
 		
+		}
 	}
 
 
+	function DeleteUser($params = null){
+		$this->authHelper->checkLoggedIn();
+		$user_id = $params[':ID'];
+
+		if(isset($user_id) && $user_id != "") {
+			$this->model->DeleteUser($user_id);
+			header("Location:".BASE_URL."homeAdmin");	
+		} else {
+			echo "Error al borrar";
+		}
+		
+	}
 
 
 

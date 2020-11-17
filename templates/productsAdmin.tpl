@@ -33,7 +33,22 @@
 
 			<button type="submit" class="btn btn-primary">Confirmar cambios</button>
 		</form>	  
+		{if $message != ""}
+			<div class="alert alert-danger" role="alert">
+		  	{$message}
+			</div>	
+		{/if}
 	</div>
+
+	<div class="container">
+		<ul class="list-group">
+	  		<h1 class="titulo">Lista de Usuarios</h1>
+	      	{foreach from = $users item=user}
+	  			<li class="list-group-item list-group-item-success">{$user->nombre}<button type="button" class="btn btn-danger"> <a href="deleteUser/{$user->id_usuario}">Borrar</a></button></li>      		
+	     	{/foreach}
+	 	</ul>
+ 	</div>
+
 
 
 </div>

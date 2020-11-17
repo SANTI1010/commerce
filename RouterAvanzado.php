@@ -25,8 +25,9 @@ $r->addRoute("verifyUser","POST","UserController","VerifyUser");
 $r->addRoute("logout","GET","UserController","Logout");
 $r->addRoute("loguearme","GET","UserController","ShowLoguearme");
 $r->addRoute("UserLoguedIn","POST","UserController","UserLoguedIn");
-
 $r->addRoute("UsersPermits","POST","UserController","UsersPermits");
+$r->addRoute("deleteUser/:ID","GET","UserController","DeleteUser");
+
 
 
 //El insert lo veo en TasksView

@@ -53,18 +53,12 @@ class UserModel {
 	    return $sentencia->rowCount();
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
+	//Borrar
+	function DeleteUser($user_id) {
+	    $sentencia = $this->db->prepare("DELETE FROM usuarios WHERE id_usuario=?");
+	    $sentencia->execute(array($user_id));
+	    return $sentencia->rowCount();//me dice cuantas filas toco
+	}
 
 
 
