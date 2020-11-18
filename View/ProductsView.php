@@ -19,7 +19,7 @@ class ProductsView {
 	}
 
 
-		function ShowDetalle($detalle) {
+		function ShowDetalle($detalle,$comentario) {
 		// inicializo Smarty y asigno las variables para mostrar
 		$smarty = new Smarty();
 		$smarty->assign('detalle', $detalle);

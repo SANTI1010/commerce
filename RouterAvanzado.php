@@ -3,6 +3,9 @@
 require_once('Controller/UserController.php');
 require_once('Controller/ProductsController.php');
 require_once('Controller/CategoriesController.php');
+//require_once('Controller/CommentController.php');
+
+
 
 require_once('RouterClass.php');
 
@@ -28,6 +31,10 @@ $r->addRoute("UserLoguedIn","POST","UserController","UserLoguedIn");
 $r->addRoute("UsersPermits","POST","UserController","UsersPermits");
 $r->addRoute("deleteUser/:ID","GET","UserController","DeleteUser");
 
+//Comments
+$r->addRoute("insertComments/:ID","GET","CommentController","InsertComments");
+
+
 
 
 //El insert lo veo en TasksView
@@ -43,6 +50,7 @@ $r->addRoute("updateCategories/:ID","POST","CategoriesController","UpdateCategor
 
 //ejemplo de CSR
 $r->addRoute("products-csr","GET","ProductsController","ProductsCSR");
+
 
 
 $r->addRoute("detalle/:ID","GET","ProductsController","DetalleProducts");

@@ -85,7 +85,9 @@ class ProductsController {
 	function DetalleProducts($params = null) {
 		$id = $params[':ID'];
 		$detalle = $this->model->DetalleProducts($id);
-		$this->view->ShowDetalle($detalle);
+		$comments = $this->model->GetComments($id);
+		var_dump($comments);
+		$this->view->ShowDetalle($detalle, $comments);
 	}
 
 	function GetCategoriesOrder($params = null){

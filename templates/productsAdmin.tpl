@@ -33,11 +33,7 @@
 
 			<button type="submit" class="btn btn-primary">Confirmar cambios</button>
 		</form>	  
-		{if $message != ""}
-			<div class="alert alert-danger" role="alert">
-		  	{$message}
-			</div>	
-		{/if}
+
 	</div>
 
 	<div class="container">
