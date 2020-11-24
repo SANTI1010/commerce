@@ -798,3 +798,42 @@ a:hover {
  	left: 73%;	
  	
 }
+
+
+
+#form p {
+  text-align: center;
+}
+
+#form label {
+  font-size: 20px;
+  display: inline;
+}
+
+
+
+.clasificacion input[type="radio"] {
+  display: none;
+}
+
+label {
+  color: grey;
+  display: inline;
+  padding-right: 10px;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.clasificacion label:hover,
+label:hover ~ label {
+  color: orange;
+}
+
+.clasificacion input[type="radio"]:checked ~ label {
+  color: orange;
+}
+
+

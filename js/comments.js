@@ -2,97 +2,45 @@ document.addEventListener('DOMContentLoaded',iniciar);
 
 async function iniciar() {
 	"use strict"
-	getComment(e);	
 
+	let id = document.getElementById("id_hidden").value;
 
-/*	document.querySelector('#form-product').addEventListener('submit', e => {
-		e.preventDefault();
-		addProducts();		
+	let app = new Vue({
+		el:'#vue-comment',
+		data : {
+			comments : [] 
+		}
 	});
-*/
 
+	getCommentById(id);
 
-	async function getComment(e) {
-		let idProducto = e.target.id;
-		const url = 'api/comments'+'/'+idProducto;
-		const container = document.querySelector('#comment-list');
-		const div = document.querySelector('.mensajes');
+	document.querySelector('.editComment').addEventListener('click', e => {
+		e.preventDefault();
 
-		try {
-			let r = await fetch(url);
-			let json = await r.json();
-			let html = '';
-			for(const elem of json) {
-				html += `<li class="list-group-item list-group-item-success">${elem.comentario} - ${elem.puntaje}<button class="btn-eliminar btn btn-warning" id='${elem.id_producto}'> Eliminar</button><button class="btn-editar btn btn-warning" id='${elem.id_producto}'> Editar</button></li>`;
-			}
-			container.innerHTML = html;
-		} catch(e){
-			div.innerHTML = "Error";
-		}
+		let comment = document.querySelector("#newComment").value;
 
+		let puntaje = document.querySelector('input[name=estrellas]:checked').value;
 
-		let allButtonsEditar = document.querySelectorAll(".btn-editar");
-	    for(var i=0; i < allButtonsEditar.length; i++){
-	      allButtonsEditar[i].addEventListener('click', async function(e) {
-	        editar(e);
-	      });
-	    }
-
-		let btnEliminar = document.querySelectorAll(".btn-eliminar");
-		for(var i=0; i < btnEliminar.length; i++){
-		      btnEliminar[i].addEventListener('click', async function (e) {
-		        deleteProducts(e);
-		      });
-		    }
-		}
-
-	
+		//let puntaje = document.getElementsByName("estrellas").value;
+		console.log(puntaje);
+	});
 
 
 
+function getCommentById(id){
+	fetch('api/comments'+'/'+id)
+		.then(response => response.json())
+		.then(comments => app.comments = comments)
+		.catch(error => console.log(error));
+}
 
 
 
-	//Muestro los productos
-/*	async function getProducts(){
-		fetch('api/products')
-			.then(response => response.json())
-			.then(productos =>render(productos))
-			.catch(error => console.log(error)); 
-	}
-
-	//Hago el HTML
-	function render(products) {
-		const container = document.querySelector('#product-list');
-
-		container.innerHTML = "";
-
-		for(let product of products) {
-			container.innerHTML += `<li class="list-group-item list-group-item-success">${product.marca} - ${product.precio}<button class="btn-eliminar btn btn-warning" id='${product.id_producto}'> Eliminar</button><button class="btn-editar btn btn-warning" id='${product.id_producto}'> Editar</button></li>`;
-		}
-
-
-		let allButtonsEditar = document.querySelectorAll(".btn-editar");
-	    for(var i=0; i < allButtonsEditar.length; i++){
-	      allButtonsEditar[i].addEventListener('click', async function(e) {
-	        editar(e);
-	      });
-	    }
-
-		let btnEliminar = document.querySelectorAll(".btn-eliminar");
-		for(var i=0; i < btnEliminar.length; i++){
-		      btnEliminar[i].addEventListener('click', async function (e) {
-		        deleteProducts(e);
-		      });
-		    }
-		}
-
-		
-	}    
-*/
 	//Inserto productos
-	function addProducts() {
-		const product = {
+	function addComments(e) {
+
+		console.log(e);
+		/*const product = {
 		    marca: document.querySelector('input[name="input_marca"]').value,
 		    talle: document.querySelector('input[name="input_talle"]').value,
 		    precio: document.querySelector('input[name="input_precio"]').value,
@@ -106,7 +54,7 @@ async function iniciar() {
 		})
 			.then(response => response.json())
 			.then(product => getProducts())
-			.catch(error => console.log(error));
+			.catch(error => console.log(error));*/
 	}
 
 

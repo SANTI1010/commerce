@@ -16,7 +16,7 @@
         <label for="priority">Categoria</label>
         <input type="number" class="form-control" id="priority"  name="input_categoria">
         </div>    
-
+        
     <button type="submit" class="btn btn-primary">Agregar</button>
     </form>
 </div>

@@ -13,10 +13,16 @@ class ApiCommentsController extends ApiController {
 
 	}
 
-	public function getCommentsID($params = null) {
-		$products_id = $params[':ID'];
-		$comments = $this->model->getComments($products_id);
-		$this->view->response($comments,200);
+
+	public function getComment($params = null) {
+		$comment = $this->model->getComment();
+		$this->view->response($comment,200);
+	}
+
+	public function getCommentsById($params = null) {
+		$comment_id = $params[':ID'];
+		$comment = $this->model->getCommentsById($comment_id);
+		$this->view->response($comment,200);
 	}
 
 /*

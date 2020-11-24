@@ -26,6 +26,16 @@ class ProductsController {
 
 	}
 
+	function Index() {
+		$products = $this->model->GetProducts();
+		$categories = $this->modelCategories->GetCategories();
+		if(isset($products) && (isset($categories)) ) {
+			$this->view->ShowHome($products, $categories);
+		} else {
+			$this->helper->showError("Error al seleccionar");
+		}
+	}
+
 
 	function Home() {
 		$this->helper->checkLoggedIn();
@@ -85,9 +95,8 @@ class ProductsController {
 	function DetalleProducts($params = null) {
 		$id = $params[':ID'];
 		$detalle = $this->model->DetalleProducts($id);
-		$comments = $this->model->GetComments($id);
-		var_dump($comments);
-		$this->view->ShowDetalle($detalle, $comments);
+		//$comments = $this->model->GetCommentById($id);
+		$this->view->ShowDetalle($detalle);
 	}
 
 	function GetCategoriesOrder($params = null){

@@ -19,6 +19,7 @@ define("LOGUEARME", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"
 $r = new Router();
 
 //home
+$r->addRoute("index","GET","ProductsController","Index");
 $r->addRoute("home","GET","ProductsController","Home");
 $r->addRoute("homeAdmin","GET","ProductsController","HomeAdmin");
 
@@ -54,7 +55,6 @@ $r->addRoute("products-csr","GET","ProductsController","ProductsCSR");
 
 
 $r->addRoute("detalle/:ID","GET","ProductsController","DetalleProducts");
-
 $r->addRoute("completar/:ID","GET","ProductsController","MarkCompletedTask");
 
 //ver
@@ -65,7 +65,9 @@ $r->addRoute("volver","GET","ProductsController","volver");
 
 
 //Ruta por defecto
-$r->setDefaultRoute("UserController","ShowLogin");
+$r->setDefaultRoute("ProductsController","index");
+
+
 
 //run
 $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']);

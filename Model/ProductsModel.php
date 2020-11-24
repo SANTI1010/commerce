@@ -19,7 +19,7 @@ class ProductsModel {
 
 		//Seleccionar
 		function GetProducts(){
-			 $sentencia = $this->db->prepare("SELECT * FROM productos INNER JOIN categorias ON productos.id_categoria = categorias.id_categoria");
+			$sentencia = $this->db->prepare("SELECT * FROM productos INNER JOIN categorias ON productos.id_categoria = categorias.id_categoria");
 		    $sentencia->execute();
 		    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
 		}
@@ -52,10 +52,10 @@ class ProductsModel {
 		}
 
 
-		function GetComments($id_producto) {
+		function GetCommentById($id_producto) {
 			$sentencia = $this->db->prepare("SELECT * FROM comentarios INNER JOIN productos ON comentarios.id_producto = productos.id_producto WHERE  comentarios.id_producto=?");
-	    $sentencia->execute(array($id_producto));
-	    return $sentencia->fetchAll(PDO::FETCH_OBJ);	
+	   		$sentencia->execute(array($id_producto));
+	    	return $sentencia->fetchAll(PDO::FETCH_OBJ);	
 		}
 
 

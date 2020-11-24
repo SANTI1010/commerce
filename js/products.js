@@ -2,6 +2,14 @@ document.addEventListener('DOMContentLoaded',iniciar);
 
 async function iniciar() {
 	"use strict"
+
+	let app = new Vue({
+		el:'#vue-product',
+		data : {
+			products : [] 
+		}
+	});
+
 	getProducts();	
 
 	document.querySelector('#form-product').addEventListener('submit', e => {
@@ -10,8 +18,74 @@ async function iniciar() {
 	});
 
 
+document.querySelector('#btn-comment').addEventListener('click', e => {
+	alert("entra");
+		//deleteProducts();		
+	});
 
 
+
+	function getProducts() {
+		fetch('api/products')
+			.then(response => response.json())
+			.then(products => app.products = products)
+			.catch(error => console.log(error));
+	}
+
+		//Inserto productos
+	function addProducts() {
+		const product = {
+		    marca: document.querySelector('input[name="input_marca"]').value,
+		    talle: document.querySelector('input[name="input_talle"]').value,
+		    precio: document.querySelector('input[name="input_precio"]').value,
+		    id_categoria: document.querySelector('input[name="input_categoria"]').value
+		}
+
+		fetch('api/products', {
+			method: 'POST',
+			headers : {"Content-Type" : "application/json"},
+			body: JSON.stringify(product)
+		})
+			.then(response => response.json())
+			.then(product => app.products.push(product))
+			.catch(error => console.log(error));
+	}
+
+
+
+
+
+		//Elimino un producto pegandole a la API
+	async function deleteProducts(e) {
+		let div = document.querySelector('.mensajes');
+		let idSeleccion = e.target.id;
+		const url = 'api/products'+'/'+idSeleccion;
+		try{
+			div.innerHTML = "Borrando";
+			let r = await fetch(url,{
+				"method":"DELETE"
+			});
+		let json = await r.json();
+			div.innerHTML = "Se borro correctamente";	
+		} catch(e) {
+			div.innerHTML="Farro al borrar";	
+		}
+		getProducts();
+	}
+
+
+
+		let btnEliminar = document.querySelectorAll(".btn-eliminar");
+		console.log(btnEliminar);
+		for(var i=0; i < btnEliminar.length; i++){
+		      btnEliminar[i].addEventListener('click', async function (e) {
+		        deleteProducts(e);
+		      });
+		    }
+		}
+
+
+/*
 	async function getProducts() {
 		const url = 'api/products';
 		const container = document.querySelector('#product-list');
@@ -44,10 +118,10 @@ async function iniciar() {
 		      });
 		    }
 		}
-
+	}	
 	
 
-
+	*/
 
 
 
@@ -89,43 +163,9 @@ async function iniciar() {
 		
 	}    
 */
-	//Inserto productos
-	function addProducts() {
-		const product = {
-		    marca: document.querySelector('input[name="input_marca"]').value,
-		    talle: document.querySelector('input[name="input_talle"]').value,
-		    precio: document.querySelector('input[name="input_precio"]').value,
-		    id_categoria: document.querySelector('input[name="input_categoria"]').value
-		}
-
-		fetch('api/products', {
-			method: 'POST',
-			headers : {"Content-Type" : "application/json"},
-			body: JSON.stringify(product)
-		})
-			.then(response => response.json())
-			.then(product => getProducts())
-			.catch(error => console.log(error));
-	}
 
 
-	//Elimino un producto pegandole a la API
-	async function deleteProducts(e) {
-		let div = document.querySelector('.mensajes');
-		let idSeleccion = e.target.id;
-		const url = 'api/products'+'/'+idSeleccion;
-		try{
-			div.innerHTML = "Borrando";
-			let r = await fetch(url,{
-				"method":"DELETE"
-			});
-		let json = await r.json();
-			div.innerHTML = "Se borro correctamente";	
-		} catch(e) {
-			div.innerHTML="Farro al borrar";	
-		}
-		getProducts();
-	}
+
 
 /*******************************/
   /***********Editar**************/
@@ -175,4 +215,3 @@ async function iniciar() {
 }
 */
 
-}

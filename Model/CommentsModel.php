@@ -10,10 +10,17 @@ class CommentsModel {
 	}	
 
 
-	function getComments($id){
-    $sentencia = $this->db->prepare("SELECT * FROM comentarios WHERE id_producto=?");
-    $sentencia->execute(array($id));
-    return $sentencia->fetch(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
+
+	function getComment(){
+		$sentencia = $this->db->prepare("SELECT * FROM comentarios");
+	    $sentencia->execute();
+	    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
+	}
+
+	function getCommentsById($id){
+    	$sentencia = $this->db->prepare("SELECT * FROM comentarios WHERE id_producto=?");
+    	$sentencia->execute(array($id));
+    	return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
 	}
 
 	

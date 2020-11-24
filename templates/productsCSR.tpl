@@ -10,9 +10,7 @@
 
 
 		<div class="col-md-8">
-			<ul id="product-list" class= "list-group">
-
-			</ul>
+			{include file="vue/product.vue"}
 		</div>
 
 	</div>

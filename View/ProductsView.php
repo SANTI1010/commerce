@@ -10,7 +10,6 @@ class ProductsView {
 	}
 
 	function ShowHome($products,$categorias) {
-		// inicializo Smarty y asigno las variables para mostrar
 		$smarty = new Smarty();
 		$smarty->assign('titulo',$this->title);
 		$smarty->assign('products', $products);
@@ -19,7 +18,7 @@ class ProductsView {
 	}
 
 
-		function ShowDetalle($detalle,$comentario) {
+		function ShowDetalle($detalle) {
 		// inicializo Smarty y asigno las variables para mostrar
 		$smarty = new Smarty();
 		$smarty->assign('detalle', $detalle);
