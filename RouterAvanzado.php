@@ -21,7 +21,7 @@ $r = new Router();
 //home
 $r->addRoute("index","GET","ProductsController","Index");
 $r->addRoute("home","GET","ProductsController","Home");
-$r->addRoute("homeAdmin","GET","ProductsController","HomeAdmin");
+//$r->addRoute("homeAdmin","GET","ProductsController","HomeAdmin");
 
 //Login
 $r->addRoute("login","GET","UserController","ShowLogin");
@@ -63,7 +63,7 @@ $r->addRoute("volver","GET","ProductsController","volver");
 
 
 //Ruta por defecto
-$r->setDefaultRoute("ProductsController","index");
+$r->setDefaultRoute("ProductsController","Home");
 
 
 

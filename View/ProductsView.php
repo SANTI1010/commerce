@@ -9,23 +9,25 @@ class ProductsView {
 		$this->title = "Lista de Productos";
 	}
 
-	function ShowHome($products,$categorias, $rol_user=null) {
+	function ShowHome($products,$categorias,$comments,$users,$rol=null) {
 		$smarty = new Smarty();
 		$smarty->assign('titulo',$this->title);
 		$smarty->assign('products', $products);
 		$smarty->assign('categorias', $categorias);
-	//	$smarty->assign('rol_user', $rol_user);
+		$smarty->assign('comments', $comments);
+		$smarty->assign('users', $users);
+		$smarty->assign('rol', $rol);
 
-		$smarty->display('templates/products.tpl'); // muestro el template   
+		$smarty->display('templates/products.tpl'); 
 	}
 
 
-		function ShowDetalle($detalle,$id_usuario) {
-		// inicializo Smarty y asigno las variables para mostrar
+		function ShowDetalle($detalle,$id_user, $rol_user) {
 		$smarty = new Smarty();
 		$smarty->assign('detalle', $detalle);
-		$smarty->assign('id_usuario', $id_usuario);
-		$smarty->display('templates/detalle.tpl'); // muestro el template   
+		$smarty->assign('id_user', $id_user);
+		$smarty->assign('rol_user', $rol_user);
+		$smarty->display('templates/detalle.tpl');    
 	}
 
 
@@ -40,6 +42,7 @@ class ProductsView {
 		$smarty->assign('categorias', $categorias);
 		$smarty->assign('users', $users);
 		$smarty->assign('comments', $comments);
+
 		$smarty->display('templates/productsAdmin.tpl');   
 	}
 

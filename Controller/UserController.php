@@ -67,7 +67,9 @@ class UserController {
 			if(isset($userFromDB) && $userFromDB){ //existe y es true.
 				if(password_verify($pass, $userFromDB->password)){
 					$this->authHelper->Login($userFromDB);
-
+						header("Location:".BASE_URL."home");
+					
+					/*
 					$rol_user = $userFromDB->rol;
 
 					if($userFromDB->rol == 'admin') {
@@ -75,6 +77,7 @@ class UserController {
 					}else {
 						header("Location:".BASE_URL."home");
 					}
+					*/
 				}else{
 					$this->view->ShowLogin("Contraseña incorrecta");
 				}

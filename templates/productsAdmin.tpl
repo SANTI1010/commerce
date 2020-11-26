@@ -46,13 +46,20 @@
  	</div>
 
  	<div class="container">
-		<ul class="list-group">
-	  		<h1 class="titulo">Lista de Comentarios</h1>
-	      	{foreach from = $comments item=comment}
-	  			<li class="list-group-item list-group-item-success">Comentario : <span class="badge badge-info">{$comment->comentario}</span>  Usuario: <span class="badge badge-info">{$comment->nombre}</span><button type="button" class="btn btn-danger"> <a href="deleteUser/{$user->id_usuario}">Borrar</a></button></li>      		
-	     	{/foreach}
-	 	</ul>
- 	</div>
+      	<ul class="list-group">
+      		<h1 class="titulo">Listado de items</h1>
+          	{foreach from = $products item=product}
+            
+      			<li class="list-group-item list-group-item-success"><p>El producto es {$product->nombre}</p>{$product->marca} <button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
+         	{/foreach}
+     	</ul>
+
+     	<h1 class="titulo">Listado de Categorias</h1>
+      	{foreach from = $categorias item=categoria}
+    		<button type="button" class="btn btn-danger"><a class="btn-text" href="ordenar/{$categoria->id_categoria}">Filtrar por {$categoria->nombre}</a></button>
+    	{/foreach}
+
+    </div>
 
 </div>
 		<div class="container">

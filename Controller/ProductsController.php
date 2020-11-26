@@ -30,10 +30,11 @@ class ProductsController {
 	}
 
 	function Index() {
+		$rol = $this->helper->getRol();
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
 		if(isset($products) && (isset($categories)) ) {
-			$this->view->ShowHome($products, $categories);
+			$this->view->ShowHome($products, $categories,$rol);
 		} else {
 			$this->helper->showError("Error al seleccionar");
 		}
@@ -41,10 +42,18 @@ class ProductsController {
 
 
 	function Home($params = null){
-		$this->helper->checkLoggedIn();
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
-		$this->view->ShowHome($products, $categories);
+		$users = $this->modelUsers->getUsers();
+		$comments = $this->modelComments->getCommentByNameUser();
+		$rol = $this->helper->getRol();
+		if(isset($rol) && $rol != NULL){
+			$this->helper->checkLoggedIn();
+			$this->view->ShowHome($products,$categories,$comments,$users,$rol);				
+		} else {
+			$this->view->ShowHome($products,$categories,$comments,$users,$rol);
+		}
+		
 	}
 
 
@@ -100,8 +109,9 @@ class ProductsController {
 	function DetalleProducts($params = null) {
 		$id = $params[':ID'];
 		$detalle = $this->model->DetalleProducts($id);
-		$id_usuario = $this->helper->getIdUsuario();
-		$this->view->ShowDetalle($detalle,$id_usuario);
+		$id_user = $this->helper->getIdUsuario();
+		$rol_user = $this->helper->getRol();
+		$this->view->ShowDetalle($detalle,$id_user,$rol_user);
 	}
 
 	function GetCategoriesOrder($params = null){
