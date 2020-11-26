@@ -23,7 +23,7 @@ class UserController {
 	}
 
 	public function UserLoguedIn() {
-
+		//verifica que no sea vacio
 		if($_POST['input_user_log'] != "" && $_POST['input_pass_log'] != "" ){
 
 			$user_log = $_POST['input_user_log'];
@@ -64,10 +64,11 @@ class UserController {
 
 		if(isset($user)){
 			$userFromDB = $this->model->GetUser($user);
-			
 			if(isset($userFromDB) && $userFromDB){ //existe y es true.
 				if(password_verify($pass, $userFromDB->password)){
 					$this->authHelper->Login($userFromDB);
+
+					$rol_user = $userFromDB->rol;
 
 					if($userFromDB->rol == 'admin') {
 						header("Location:".BASE_URL."homeAdmin");

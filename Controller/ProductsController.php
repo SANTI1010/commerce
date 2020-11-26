@@ -6,6 +6,7 @@ require_once "./Model/CategoriesModel.php";
 require_once "./View/CategoriesView.php";
 require_once "./Helpers/Helper.php";
 require_once "./Model/UserModel.php";
+require_once "./Model/CommentsModel.php";
 
 class ProductsController {
 
@@ -15,6 +16,7 @@ class ProductsController {
 	private $viewCategories;
 	private $helper;
 	private $modelUsers;
+	private $modelComments;
 
 	function __construct(){
 		$this->view = new ProductsView();
@@ -23,6 +25,7 @@ class ProductsController {
 		$this->viewCategories = new CategoriesView();
 		$this->helper = new Helper();
 		$this->modelUsers = new UserModel();
+		$this->modelComments = new CommentsModel();
 
 	}
 
@@ -37,7 +40,7 @@ class ProductsController {
 	}
 
 
-	function Home() {
+	function Home($params = null){
 		$this->helper->checkLoggedIn();
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
@@ -45,16 +48,18 @@ class ProductsController {
 	}
 
 
-	function HomeAdmin() {
+	function HomeAdmin($params = null){
+		$this->helper->getRol();
 		$this->helper->checkLoggedIn();
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
 		$users = $this->modelUsers->getUsers();
+		$comments = $this->modelComments->getCommentByNameUser();
 
 		if(isset($products) && $products != '' && isset($categories) && $categories != '' && isset($users) && $users != '')
-			$this->view->ShowHomeAdmin($products, $categories,$users);
+			$this->view->ShowHomeAdmin($products, $categories,$users, $comments);
 		else
-			echo "No hay productos";
+			$this->view->ShowError("No hay productos");
 	}
 
 
@@ -95,8 +100,8 @@ class ProductsController {
 	function DetalleProducts($params = null) {
 		$id = $params[':ID'];
 		$detalle = $this->model->DetalleProducts($id);
-		//$comments = $this->model->GetCommentById($id);
-		$this->view->ShowDetalle($detalle);
+		$id_usuario = $this->helper->getIdUsuario();
+		$this->view->ShowDetalle($detalle,$id_usuario);
 	}
 
 	function GetCategoriesOrder($params = null){

@@ -16,11 +16,7 @@ $router->addRoute('products/:ID','PUT', 'ApiProductsController','updateProducts'
 
 //Comments
 $router->addRoute('comments/:ID','GET', 'ApiCommentsController','getCommentsById');
-
-
-$router->addRoute('comments/','GET', 'ApiCommentsController','getComment');
-
-
+$router->addRoute('comments/','POST', 'ApiCommentsController','insertComments');
 
 //run
 $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);

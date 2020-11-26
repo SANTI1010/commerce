@@ -36,8 +36,6 @@ $r->addRoute("deleteUser/:ID","GET","UserController","DeleteUser");
 $r->addRoute("insertComments/:ID","GET","CommentController","InsertComments");
 
 
-
-
 //El insert lo veo en TasksView
 $r->addRoute("insert","POST","ProductsController","InsertProducts");
 $r->addRoute("delete/:ID","GET","ProductsController","DeleteProducts");

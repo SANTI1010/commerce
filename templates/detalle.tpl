@@ -12,7 +12,8 @@
 			 	</ul>
 		 	</div>
 
-		 	<input id="id_hidden" type="hidden" value="{$detalle->id_producto}">
+		 	<input id="id_product_hidden" type="hidden" value="{$detalle->id_producto}">
+		 	<input id="id_usuario_hidden" type="hidden" value="{$id_usuario}">
 
 		 	<div class="col-md-6">
 				{include file="vue/comment.vue"}

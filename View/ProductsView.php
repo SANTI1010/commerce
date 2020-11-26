@@ -9,19 +9,22 @@ class ProductsView {
 		$this->title = "Lista de Productos";
 	}
 
-	function ShowHome($products,$categorias) {
+	function ShowHome($products,$categorias, $rol_user=null) {
 		$smarty = new Smarty();
 		$smarty->assign('titulo',$this->title);
 		$smarty->assign('products', $products);
 		$smarty->assign('categorias', $categorias);
+	//	$smarty->assign('rol_user', $rol_user);
+
 		$smarty->display('templates/products.tpl'); // muestro el template   
 	}
 
 
-		function ShowDetalle($detalle) {
+		function ShowDetalle($detalle,$id_usuario) {
 		// inicializo Smarty y asigno las variables para mostrar
 		$smarty = new Smarty();
 		$smarty->assign('detalle', $detalle);
+		$smarty->assign('id_usuario', $id_usuario);
 		$smarty->display('templates/detalle.tpl'); // muestro el template   
 	}
 
@@ -31,11 +34,12 @@ class ProductsView {
 		header("Location: ".BASE_URL."home");
 	}
 
-	function ShowHomeAdmin($products,$categorias,$users) {
+	function ShowHomeAdmin($products,$categorias,$users,$comments) {
 		$smarty = new Smarty();
 		$smarty->assign('products', $products);
 		$smarty->assign('categorias', $categorias);
 		$smarty->assign('users', $users);
+		$smarty->assign('comments', $comments);
 		$smarty->display('templates/productsAdmin.tpl');   
 	}
 

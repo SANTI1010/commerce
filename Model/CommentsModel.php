@@ -11,8 +11,8 @@ class CommentsModel {
 
 
 
-	function getComment(){
-		$sentencia = $this->db->prepare("SELECT * FROM comentarios");
+	function getCommentByNameUser(){
+		$sentencia = $this->db->prepare("SELECT * FROM comentarios INNER JOIN usuarios ON comentarios.id_usuario = usuarios.id_usuario");
 	    $sentencia->execute();
 	    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
 	}
@@ -22,6 +22,13 @@ class CommentsModel {
     	$sentencia->execute(array($id));
     	return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
 	}
+
+	//Insertar
+		function InsertComments($comentario,$puntaje,$id_producto,$id_usuario){
+		    $sentencia = $this->db->prepare("INSERT INTO comentarios(comentario,puntaje,id_producto,id_usuario) VALUES (?,?,?,?)");
+		    $sentencia->execute(array($comentario,$puntaje,$id_producto,$id_usuario));
+		    return $this->db->lastInsertId();
+		}
 
 	
 /*

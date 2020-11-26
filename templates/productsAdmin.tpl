@@ -45,7 +45,14 @@
 	 	</ul>
  	</div>
 
-
+ 	<div class="container">
+		<ul class="list-group">
+	  		<h1 class="titulo">Lista de Comentarios</h1>
+	      	{foreach from = $comments item=comment}
+	  			<li class="list-group-item list-group-item-success">Comentario : <span class="badge badge-info">{$comment->comentario}</span>  Usuario: <span class="badge badge-info">{$comment->nombre}</span><button type="button" class="btn btn-danger"> <a href="deleteUser/{$user->id_usuario}">Borrar</a></button></li>      		
+	     	{/foreach}
+	 	</ul>
+ 	</div>
 
 </div>
 		<div class="container">
@@ -98,4 +105,4 @@
 		        </form>
 		</div>
 
-
+{include file="footer.tpl"}	

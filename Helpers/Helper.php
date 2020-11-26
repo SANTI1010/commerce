@@ -12,6 +12,8 @@ class Helper {
 	public function Login($user) {
 		session_start();
 		$_SESSION["NOMBRE"] = $user->nombre;
+		$_SESSION["ID"] = $user->id_usuario;
+		$_SESSION["ROL"] = $user->rol;
 		$_SESSION['LAST_ACTIVITY'] = time(); // actualiza el último instante de actividad
 	}
 
@@ -32,6 +34,16 @@ class Helper {
 				die();//corto toda la ejecucion
 			} 
 		}
+	}
+
+	public function getRol(){
+		session_start();
+		return $_SESSION["ROL"];
+	}
+
+	public function getIdUsuario(){
+		session_start();
+		return $_SESSION["ID"];
 	}
 
 }

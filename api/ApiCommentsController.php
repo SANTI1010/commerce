@@ -13,19 +13,34 @@ class ApiCommentsController extends ApiController {
 
 	}
 
-
-	public function getComment($params = null) {
-		$comment = $this->model->getComment();
-		$this->view->response($comment,200);
-	}
-
 	public function getCommentsById($params = null) {
 		$comment_id = $params[':ID'];
 		$comment = $this->model->getCommentsById($comment_id);
 		$this->view->response($comment,200);
 	}
 
+
+
+	public function insertComments($params = null) {
+		$body = $this->getData();
+		$comment = $this->model->insertComments($body->comentario, $body->puntaje, $body->id_producto, $body->id_usuario);	
+
+		if ($comment) 
+			$this->view->response($this->model->getCommentsById($comment),201);
+		else
+			$this->view->response('La tarea no se agrego',404);	
+	}
+
+
+
+
 /*
+	
+	public function getComment($params = null) {
+		$comment = $this->model->getComment();
+		$this->view->response($comment,200);
+	}
+
 	public function getProductsID($params = null) {
 		$products_id = $params[':ID'];
 		$products = $this->model->GetProductById($products_id);

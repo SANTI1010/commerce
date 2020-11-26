@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded',iniciar);
 async function iniciar() {
 	"use strict"
 
-	let id = document.getElementById("id_hidden").value;
+	let id = document.getElementById("id_product_hidden").value;
+	let id_usuario = document.getElementById("id_usuario_hidden").value;
 
 	let app = new Vue({
 		el:'#vue-comment',
@@ -14,50 +15,40 @@ async function iniciar() {
 
 	getCommentById(id);
 
-	document.querySelector('.editComment').addEventListener('click', e => {
+	document.querySelector('#form-comment').addEventListener('submit', e => {
 		e.preventDefault();
-
-		let comment = document.querySelector("#newComment").value;
-
-		let puntaje = document.querySelector('input[name=estrellas]:checked').value;
-
-		//let puntaje = document.getElementsByName("estrellas").value;
-		console.log(puntaje);
-	});
+		insertComment();
+	});	
 
 
-
-function getCommentById(id){
-	fetch('api/comments'+'/'+id)
-		.then(response => response.json())
-		.then(comments => app.comments = comments)
-		.catch(error => console.log(error));
-}
-
-
-
-	//Inserto productos
-	function addComments(e) {
-
-		console.log(e);
-		/*const product = {
-		    marca: document.querySelector('input[name="input_marca"]').value,
-		    talle: document.querySelector('input[name="input_talle"]').value,
-		    precio: document.querySelector('input[name="input_precio"]').value,
-		    id_categoria: document.querySelector('input[name="input_categoria"]').value
-		}
-
-		fetch('api/products', {
-			method: 'POST',
-			headers : {"Content-Type" : "application/json"},
-			body: JSON.stringify(product)
-		})
+	function getCommentById(id){
+		fetch('api/comments'+'/'+id)
 			.then(response => response.json())
-			.then(product => getProducts())
-			.catch(error => console.log(error));*/
+			.then(comments => app.comments = comments)
+			.catch(error => console.log(error));
 	}
 
 
+	function insertComment() {
+		const comment = {
+			comentario: document.querySelector("#newComment").value,
+			puntaje: document.querySelector('input[name=estrellas]:checked').value,
+			id_producto : id,
+			id_usuario : id_usuario
+		}
+
+		fetch('api/comments', {
+			method: 'POST',
+			headers : {"Content-Type" : "application/json"},
+			body: JSON.stringify(comment)
+		})
+			.then(response => response.json())
+			.then(comments => app.comments.push(comment))
+			.catch(error => console.log(error));
+	}
+
+
+	
 	//Elimino un producto pegandole a la API
 	async function deleteProducts(e) {
 		let div = document.querySelector('.mensajes');
