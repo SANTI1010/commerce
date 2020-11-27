@@ -9,6 +9,7 @@
 			      		<li class="list-group-item list-group-item-success">La marca es: {$detalle->marca}</li>
 			      		<li class="list-group-item list-group-item-success">El talle es: {$detalle->talle}</li>
 			      		<li class="list-group-item list-group-item-success">El precio es: ${$detalle->precio}</li>
+			      		<li class="list-group-item list-group-item-success"><img src="{$detalle->imagen}"></li>
 			 	</ul>
 		 	</div>
 

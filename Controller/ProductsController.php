@@ -108,7 +108,15 @@ class ProductsController {
 	function UpdateProducts($params = null) {
 		$this->helper->checkLoggedIn();
 		$id = $params[':ID'];
-		$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria']);
+
+		if($_FILES['update_img']['type'] == "image/jpg" || $_FILES['update_img']['type'] == "image/jpeg" || $_FILES['update_img']['type'] == "image/png" || …) 
+		{	
+			$realName = $this->uniqueSaveName($_FILES['update_img']['name'], $_FILES['update_img']['tmp_name']);
+
+			$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria'], $realName);
+		}else {
+			$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria']);
+		}
 
 		header("Location:".BASE_URL."home");
 	}

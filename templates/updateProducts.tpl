@@ -20,7 +20,12 @@
 		              <label for="priority">Precio</label>
 		              <input class="form-control" id="priority" value="{$product->precio}" name="update_precio">
 		            </div>
-		           <input type="file" name="input_name" id="imageToUpload"> 
+
+		            <div class="form-group">
+		            	<img src="{$product->imagen}">
+		            </div>
+
+		           <input type="file" name="update_img" id="img_product"> 
 		          
 		          <button type="submit" class="btn btn-primary">Agregar</button>
 		        </form>

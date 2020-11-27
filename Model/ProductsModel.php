@@ -66,9 +66,9 @@ class ProductsModel {
 		}
 
 		//Actualizar
-		function UpdateProducts($id,$marca,$talle,$precio,$id_categoria) {
-		    $sentencia = $this->db->prepare("UPDATE productos SET marca=?, talle=?, precio=?, id_categoria=? WHERE id_producto=? ");
-		    $sentencia->execute(array($marca,$talle,$precio,$id_categoria,$id));
+		function UpdateProducts($id,$marca,$talle,$precio,$id_categoria,$img = null) {
+		    $sentencia = $this->db->prepare("UPDATE productos SET marca=?, talle=?, precio=?, id_categoria=?, imagen=? WHERE id_producto=? ");
+		    $sentencia->execute(array($marca,$talle,$precio,$id_categoria,$img,$id));
 		    return $sentencia->rowCount();
 		}
 }
