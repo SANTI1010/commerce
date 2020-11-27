@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 			<div class="container">
-		      <form action="updateProducts/{$id}" method="post">
+		      <form action="updateProducts/{$id}" method="post" enctype="multipart/form-data">
 		          <div class="form-group">
 		          	<label for="inputState">Categorias</label>
 				      <select name="categoria" class="form-control">
@@ -20,6 +20,7 @@
 		              <label for="priority">Precio</label>
 		              <input class="form-control" id="priority" value="{$product->precio}" name="update_precio">
 		            </div>
+		           <input type="file" name="input_name" id="imageToUpload"> 
 		          
 		          <button type="submit" class="btn btn-primary">Agregar</button>
 		        </form>

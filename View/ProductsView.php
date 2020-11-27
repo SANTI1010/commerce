@@ -22,7 +22,7 @@ class ProductsView {
 	}
 
 
-		function ShowDetalle($detalle,$id_user, $rol_user) {
+		function ShowDetalle($detalle,$id_user = null, $rol_user = null) {
 		$smarty = new Smarty();
 		$smarty->assign('detalle', $detalle);
 		$smarty->assign('id_user', $id_user);

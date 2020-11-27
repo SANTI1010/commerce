@@ -31,9 +31,9 @@ class ProductsModel {
 		}
 
 		//Insertar
-		function InsertProducts($marca,$talle,$precio,$id_categoria){
-		    $sentencia = $this->db->prepare("INSERT INTO productos(marca,talle,precio,id_categoria) VALUES (?,?,?,?)");
-		    $sentencia->execute(array($marca,$talle,$precio,$id_categoria));
+		function InsertProducts($marca,$talle,$precio,$id_categoria,$img = null){
+		    $sentencia = $this->db->prepare("INSERT INTO productos(marca,talle,precio,id_categoria,imagen) VALUES (?,?,?,?,?)");
+		    $sentencia->execute(array($marca,$talle,$precio,$id_categoria,$img));
 		    return $this->db->lastInsertId();
 		}
 
@@ -65,14 +65,12 @@ class ProductsModel {
 	    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
 		}
 
-
 		//Actualizar
 		function UpdateProducts($id,$marca,$talle,$precio,$id_categoria) {
 		    $sentencia = $this->db->prepare("UPDATE productos SET marca=?, talle=?, precio=?, id_categoria=? WHERE id_producto=? ");
 		    $sentencia->execute(array($marca,$talle,$precio,$id_categoria,$id));
 		    return $sentencia->rowCount();
 		}
-	
 }
 
 

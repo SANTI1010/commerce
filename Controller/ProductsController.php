@@ -29,18 +29,6 @@ class ProductsController {
 
 	}
 
-	function Index() {
-		$rol = $this->helper->getRol();
-		$products = $this->model->GetProducts();
-		$categories = $this->modelCategories->GetCategories();
-		if(isset($products) && (isset($categories)) ) {
-			$this->view->ShowHome($products, $categories,$rol);
-		} else {
-			$this->helper->showError("Error al seleccionar");
-		}
-	}
-
-
 	function Home($params = null){
 		$products = $this->model->GetProducts();
 		$categories = $this->modelCategories->GetCategories();
@@ -71,22 +59,41 @@ class ProductsController {
 			$this->view->ShowError("No hay productos");
 	}
 
+/*Construye un archivo unico y lo manda a mi carpeta de img*/
+	function uniqueSaveName($realName,$tempName){
+		$filePath = "img/" . uniqid("", true) . "." 
+.		strtolower(pathinfo($realName, PATHINFO_EXTENSION));
+		
+		//Muevo el nombre temp a img
+		move_uploaded_file($tempName, $filePath);	
+
+		return $filePath;
+	}
+
 
 	function InsertProducts() {
 		$this->helper->checkLoggedIn();
-		$success = $this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria']);
+
+		if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" || $_FILES['input_name']['type'] == "image/png" || …) 
+		{	
+			$realName = $this->uniqueSaveName($_FILES['input_name']['name'], $_FILES['input_name']['tmp_name']);
+
+			$success = $this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria'],$realName);
+		}else {
+			$success = $this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria']);
+		}
+		
 		if($success)
-			header("Location:".BASE_URL."homeAdmin");
+			header("Location:".BASE_URL."home");
 		else
 			$this->helper->showError("No se pudo insertar la tarea correctamente");
-
 	}
 	
 	function DeleteProducts($params = null){
 		$this->helper->checkLoggedIn();
 		$products_id = $params[':ID'];
 		$this->model->DeleteProducts($products_id);
-		header("Location:".BASE_URL."homeAdmin");
+		header("Location:".BASE_URL."home");
 	}
 
 
@@ -103,15 +110,20 @@ class ProductsController {
 		$id = $params[':ID'];
 		$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria']);
 
-		header("Location:".BASE_URL."homeAdmin");
+		header("Location:".BASE_URL."home");
 	}
 
 	function DetalleProducts($params = null) {
 		$id = $params[':ID'];
-		$detalle = $this->model->DetalleProducts($id);
-		$id_user = $this->helper->getIdUsuario();
 		$rol_user = $this->helper->getRol();
-		$this->view->ShowDetalle($detalle,$id_user,$rol_user);
+		$detalle = $this->model->DetalleProducts($id);
+		if(isset($rol_user) && $rol_user != NULL){	
+			$id_user = $this->helper->getIdUsuario();
+			$this->view->ShowDetalle($detalle,$id_user,$rol_user);
+		} else {
+			$this->view->ShowDetalle($detalle);
+		}
+		
 	}
 
 	function GetCategoriesOrder($params = null){
@@ -129,6 +141,5 @@ class ProductsController {
 	function ProductsCSR(){
 		$this->view->ShowProductsCSR();
 	}
-
 
 }

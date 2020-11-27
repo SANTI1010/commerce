@@ -49,16 +49,10 @@
                 {/foreach}
             </ul>
         </div>
-    {/if}    
 
-
-    <!---------------------->
-    <!--------USER--------->
-    <!---------------------->
-    {if $rol == 'user'}    
         <div class="container">
             <h1 class="titulo">Agregar items</h1>
-              <form action="insert" method="post">
+              <form action="insert" method="post" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="inputState">Categorias</label>
                       <select name="categoria" class="form-control">
@@ -78,7 +72,7 @@
                       <label for="priority">Precio</label>
                       <input class="form-control" id="priority" name="input_precio">
                     </div>
-                  
+                  <input type="file" name="input_name" id="imageToUpload">
                   <button type="submit" class="btn btn-primary">Agregar</button>
                 </form>
         </div> 
@@ -98,6 +92,14 @@
                 </form>
         </div>
 
+    {/if}    
+
+
+    <!---------------------->
+    <!--------USER--------->
+    <!---------------------->
+    {if $rol == 'user'}    
+        
         <div class="container">
             <ul class="list-group">
             <h1 class="titulo">Lista de categorias</h1>
@@ -136,10 +138,30 @@
 	<div class="container">
       	<ul class="list-group">
       		<h1 class="titulo">Listado de items</h1>
-          	{foreach from = $products item=product}
-            
-      			<li class="list-group-item list-group-item-success"><p>El producto es {$product->nombre}</p>{$product->marca} <button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
-         	{/foreach}
+            {if $rol == 'user'}
+                {foreach from = $products item=product}
+      			   <li class="list-group-item list-group-item-success"><p>El producto es {$product->nombre}</p>{$product->marca} <button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button><button type="button" class="btn btn-danger"><a href="delete/{$product->id_producto}">Borrar</a></button></li>      		
+         	    {/foreach}
+            {else if $rol == 'admin'}
+               {foreach from = $products item=product}
+                    <li class="list-group-item list-group-item-success">
+                        <p>El producto es {$product->nombre}</p>
+                        {$product->marca} 
+                        <button type="button" class="btn btn-warning"> 
+                            <a href="detalle/{$product->id_producto}">Detalle</a>
+                        </button>
+                        <button type="button" class="btn btn-success"> 
+                            <a href="editProducts/{$product->id_producto}">Editar producto</a>
+                        </button>
+                        
+                    </li>
+                {/foreach}    
+            {else}    
+                {foreach from = $products item=product}
+                    <li class="list-group-item list-group-item-success"><p>El producto es {$product->nombre}</p>{$product->marca} <button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>
+                {/foreach}
+            {/if} 
+
      	</ul>
     </div>
 
