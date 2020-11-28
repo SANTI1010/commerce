@@ -2,7 +2,9 @@
 
 <div id="vue-comment">
 	<input type="hidden" v-model="rol_user">
+	<!--<input type="hidden" v-model="id_producto">-->
 
+	
 	<ul id="comment-list" class="list-group" >
 		<li v-for="comment in comments"
 		 class="list-group-item">
@@ -22,9 +24,11 @@
 			<div v-else-if="comment.puntaje == 5">
 				<label classs="stars_select" for="radio1">★★★★★</label>
 			</div>
-
+			<p>{{comment.id_comentario}}</p>
 			<div v-if="rol_user == 'admin' ">	
-				<button  v-on:click="deleteComment(comment.id_comentario)" class="btn btn-danger">Eliminar</button>
+					<a @click="deleteComment(comment.id_comentario)">
+						<button class="btn btn-danger">Eliminar</button>
+					</a>
 			</div>		
 		</li>
 	</ul>

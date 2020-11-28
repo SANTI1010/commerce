@@ -121,20 +121,7 @@
  
     
     {/if}
-  <!--  <button type="button" class="btn login"><a class="btn-text" href="products-csr/">csr</a></button>-->
-	<!--
-    <section>
-		<div class="contenedor">
-			<h1 class="titulo">Especialista en Voleyball</h1>
-			<p>En Voley en Casa tenes tu tienda online pensada para ofrecerte los mejores artículos de voley para tu seguridad ya sea entrenando o en partido!</p>            
-
-			<h2 class="subtitulo">La importancia de la proteccion de rodillas y codos</h2>
-			
-			<p>Cuando empezas a jugar al volleyball, tu cuerpo todavía no está acostumbrado a los golpes que vas a recibir, así que, al principio es importante que tengas protectores para los codos y las rodillas. Las mangas son una buena elección para aquellas personas que se preocupan mucho por sus brazos, o que tienen la piel demasiado sensible. Estas deben ser de licra, o algodón, y que deje transpirar bien a la piel. Algunas veces va a ser inevitable que tengas que lanzarte en plancha o de lado para alcanzar la pelota, y para esto estan las rodilleras, que te ayudaran a preparar tu cuerpo de los golpes y las caidas!.
-			</p>
-		</div>
-	</section>
-    -->
+  
     {if $rol != 'admin' }
         <div class="container">
             <h1 class="titulo">Listado de Categorias</h1>
@@ -149,7 +136,7 @@
       		<h1 class="titulo">Listado de items</h1>
             {if $rol == 'user'}
                 {foreach from = $products item=product}
-      			   <li class="list-group-item list-group-item-success"><p>El producto es {$product->nombre}</p>{$product->marca} <button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
+      			   <li class="list-group-item list-group-item-success"><p>El producto es {$product->nombre}</p>{$product->marca} <img src="{$product->imagen}"> <button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
          	    {/foreach}
             {else if $rol == 'admin'}
                {foreach from = $products item=product}
