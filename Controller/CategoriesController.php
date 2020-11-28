@@ -26,13 +26,13 @@ class CategoriesController {
 	function InsertCategories() {
 		$nameCategories = $_POST['input_categoria'];
 		$this->model->InsertCategories($nameCategories);
-		header("Location:".BASE_URL."homeAdmin");
+		header("Location:".BASE_URL."home");
 	}
 
 	function DeleteCategories($params = null) {
 		$categorie_id = $params[':ID'];
 		$this->model->DeleteCategories($categorie_id);
-		header("Location:".BASE_URL."homeAdmin");
+		header("Location:".BASE_URL."home");
 	}
 
 
@@ -46,7 +46,7 @@ class CategoriesController {
 		$id = $params[':ID'];
 		$this->model->UpdateCategories($id,$_POST['update_nombre']);
 
-		header("Location:".BASE_URL."homeAdmin");
+		header("Location:".BASE_URL."home");
 	}
 
 }

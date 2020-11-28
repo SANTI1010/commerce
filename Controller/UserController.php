@@ -68,16 +68,6 @@ class UserController {
 				if(password_verify($pass, $userFromDB->password)){
 					$this->authHelper->Login($userFromDB);
 						header("Location:".BASE_URL."home");
-					
-					/*
-					$rol_user = $userFromDB->rol;
-
-					if($userFromDB->rol == 'admin') {
-						header("Location:".BASE_URL."homeAdmin");
-					}else {
-						header("Location:".BASE_URL."home");
-					}
-					*/
 				}else{
 					$this->view->ShowLogin("Contraseña incorrecta");
 				}
@@ -115,7 +105,7 @@ class UserController {
 
 		if(isset($user_id) && $user_id != "") {
 			$this->model->DeleteUser($user_id);
-			header("Location:".BASE_URL."homeAdmin");	
+			header("Location:".BASE_URL."home");	
 		} else {
 			echo "Error al borrar";
 		}

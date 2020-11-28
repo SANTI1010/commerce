@@ -21,7 +21,6 @@ $r = new Router();
 //home
 $r->addRoute("index","GET","ProductsController","Index");
 $r->addRoute("home","GET","ProductsController","Home");
-//$r->addRoute("homeAdmin","GET","ProductsController","HomeAdmin");
 
 //Login
 $r->addRoute("login","GET","UserController","ShowLogin");

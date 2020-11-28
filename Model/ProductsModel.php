@@ -24,6 +24,14 @@ class ProductsModel {
 		    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
 		}
 
+
+		function GetProductId($id){
+			$sentencia = $this->db->prepare("SELECT * FROM productos WHERE id_producto=?");
+		    $sentencia->execute(array($id));
+		    return $sentencia->fetch(PDO::FETCH_OBJ);
+		}
+
+
 		function GetProductById($id) {
 			$sentencia = $this->db->prepare("SELECT * FROM productos INNER JOIN categorias ON productos.id_categoria = categorias.id_categoria WHERE id_producto=?");
 		    $sentencia->execute(array($id));
@@ -67,9 +75,18 @@ class ProductsModel {
 
 		//Actualizar
 		function UpdateProducts($id,$marca,$talle,$precio,$id_categoria,$img = null) {
-		    $sentencia = $this->db->prepare("UPDATE productos SET marca=?, talle=?, precio=?, id_categoria=?, imagen=? WHERE id_producto=? ");
-		    $sentencia->execute(array($marca,$talle,$precio,$id_categoria,$img,$id));
-		    return $sentencia->rowCount();
+			
+			if($img != null){
+				$sentencia = $this->db->prepare("UPDATE productos SET marca=?, talle=?, precio=?, id_categoria=?, imagen=? WHERE id_producto=? ");
+			    $sentencia->execute(array($marca,$talle,$precio,$id_categoria,$img,$id));
+			    return $sentencia->rowCount();	
+			} else {
+				$sentencia = $this->db->prepare("UPDATE productos SET marca=?, talle=?, precio=?, id_categoria=? WHERE id_producto=? ");
+			    $sentencia->execute(array($marca,$talle,$precio,$id_categoria,$id));
+			    return $sentencia->rowCount();	
+			}
+
+		    
 		}
 }
 

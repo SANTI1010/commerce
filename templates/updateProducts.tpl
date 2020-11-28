@@ -4,7 +4,6 @@
 		          <div class="form-group">
 		          	<label for="inputState">Categorias</label>
 				      <select name="categoria" class="form-control">
-				      	<option id="optionOculto">{$product->nombre}</option>
 					    {foreach from = $categorias item=categoria}
 						    <option value="{$categoria->id_categoria}">{$categoria->nombre}</option>
 						{/foreach}
@@ -24,7 +23,7 @@
 		            <div class="form-group">
 		            	<img src="{$product->imagen}">
 		            </div>
-
+		           <input type="hidden" name="previous_img" value="{$product->imagen}"> 
 		           <input type="file" name="update_img" id="img_product"> 
 		          
 		          <button type="submit" class="btn btn-primary">Agregar</button>

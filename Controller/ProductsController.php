@@ -44,21 +44,6 @@ class ProductsController {
 		
 	}
 
-
-	function HomeAdmin($params = null){
-		$this->helper->getRol();
-		$this->helper->checkLoggedIn();
-		$products = $this->model->GetProducts();
-		$categories = $this->modelCategories->GetCategories();
-		$users = $this->modelUsers->getUsers();
-		$comments = $this->modelComments->getCommentByNameUser();
-
-		if(isset($products) && $products != '' && isset($categories) && $categories != '' && isset($users) && $users != '')
-			$this->view->ShowHomeAdmin($products, $categories,$users, $comments);
-		else
-			$this->view->ShowError("No hay productos");
-	}
-
 /*Construye un archivo unico y lo manda a mi carpeta de img*/
 	function uniqueSaveName($realName,$tempName){
 		$filePath = "img/" . uniqid("", true) . "." 
@@ -92,6 +77,9 @@ class ProductsController {
 	function DeleteProducts($params = null){
 		$this->helper->checkLoggedIn();
 		$products_id = $params[':ID'];
+		$path = $this->model->GetProductId($products_id);
+		unlink($path->imagen);
+
 		$this->model->DeleteProducts($products_id);
 		header("Location:".BASE_URL."home");
 	}
@@ -108,14 +96,20 @@ class ProductsController {
 	function UpdateProducts($params = null) {
 		$this->helper->checkLoggedIn();
 		$id = $params[':ID'];
+		//Si no se edito la imagen, viene vacio, entonces inserto la previa.
+		if($_FILES['update_img']['name'] == ""){
+			$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria'],$_POST['previous_img']);
+		} else {
+		//Si se edito la imagen, pregunto que tipo es, la meto el nombre, borro la previa e inserto la nueva.	
+			if($_FILES['update_img']['type'] == "image/jpg" || $_FILES['update_img']['type'] == "image/jpeg" || $_FILES['update_img']['type'] == "image/png" || '…') {	
+				$realName = $this->uniqueSaveName($_FILES['update_img']['name'], $_FILES['update_img']['tmp_name']);
+			
+				if(isset($_POST['previous_img'])) {
+				unlink($_POST['previous_img']);
+			}
 
-		if($_FILES['update_img']['type'] == "image/jpg" || $_FILES['update_img']['type'] == "image/jpeg" || $_FILES['update_img']['type'] == "image/png" || …) 
-		{	
-			$realName = $this->uniqueSaveName($_FILES['update_img']['name'], $_FILES['update_img']['tmp_name']);
-
-			$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria'], $realName);
-		}else {
-			$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria']);
+				$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria'], $realName);
+			}
 		}
 
 		header("Location:".BASE_URL."home");

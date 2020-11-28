@@ -24,8 +24,7 @@
 			</div>
 
 			<div v-if="rol_user == 'admin' ">	
-
-					<button  v-on:click="deleteComment(comment.id_comentario)" class="btn btn-danger">Eliminar</button>
+				<button  v-on:click="deleteComment(comment.id_comentario)" class="btn btn-danger">Eliminar</button>
 			</div>		
 		</li>
 	</ul>
