@@ -22,8 +22,12 @@ class ApiCommentsController extends ApiController {
 
 
 	public function insertComments($params = null) {
-		$body = $this->getData();
-		$comment = $this->model->insertComments($body->comentario, $body->puntaje, $body->id_producto, $body->id_usuario);	
+		$body = $this->getData(); 
+		if(isset($body) && $body != "") {
+			$comment = $this->model->insertComments($body->comentario, $body->puntaje, $body->id_producto, $body->id_usuario);	
+		} else {
+			$this->view->msjError("No existe body");
+		}
 
 		if ($comment) 
 			$this->view->response($this->model->getCommentsById($comment),201);

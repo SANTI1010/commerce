@@ -34,10 +34,33 @@ class ProductsController {
 		$categories = $this->modelCategories->GetCategories();
 		$users = $this->modelUsers->getUsers();
 		$comments = $this->modelComments->getCommentByNameUser();
+		$countFilas = $this->model->GetAllProducts();
+
+		//Paginación
+		$articulo_por_pagina = 3;
+        $total_productos_db = $countFilas;
+        $paginas = $total_productos_db / $articulo_por_pagina;
+        $paginas_total = ceil($paginas);
+
+		
+		if(empty($_GET['pagina'])) {
+			header('Location:products?pagina=1');			
+		} else {
+			$page = ($_GET['pagina']-1)*3;
+		}
+
+		if($_GET['pagina'] > $paginas_total || $_GET['pagina'] <= 0){
+			header('Location:products?pagina=1');
+		}
+
+
+		
+		$productLimit = $this->model->GetProductsLimit($page,$articulo_por_pagina);
+
 		$rol = $this->helper->getRol();
-		if(isset($rol) && $rol != NULL){
+		if(isset($rol) && $rol != NULL ){
 			$this->helper->checkLoggedIn();
-			$this->view->ShowHome($products,$categories,$comments,$users,$rol);				
+			$this->view->ShowHome($products,$categories,$comments,$users,$rol,$countFilas, $productLimit);				
 		} else {
 			$this->view->ShowHome($products,$categories,$comments,$users,$rol);
 		}
@@ -59,29 +82,39 @@ class ProductsController {
 	function InsertProducts() {
 		$this->helper->checkLoggedIn();
 
-		if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" || $_FILES['input_name']['type'] == "image/png" || …) 
-		{	
-			$realName = $this->uniqueSaveName($_FILES['input_name']['name'], $_FILES['input_name']['tmp_name']);
+		if(isset($_POST['input_marca']) && $_POST['input_marca'] != "" && isset($_POST['input_talle']) && $_POST['input_marca'] != "" && isset($_POST['input_precio']) && $_POST['input_precio'] != "" && isset($_POST['categoria']) && $_POST['categoria'] != "" && isset($_FILES['input_name']) && $_FILES['input_name'] != "") {
 
-			$success = $this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria'],$realName);
-		}else {
-			$success = $this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria']);
-		}
-		
-		if($success)
-			header("Location:".BASE_URL."home");
-		else
-			$this->helper->showError("No se pudo insertar la tarea correctamente");
+			if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" || $_FILES['input_name']['type'] == "image/png" || …) 
+			{	
+				$realName = $this->uniqueSaveName($_FILES['input_name']['name'], $_FILES['input_name']['tmp_name']);
+
+				$success = $this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria'],$realName);
+			}else {
+				$success = $this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria']);
+			}
+			
+			if($success)
+				header("Location:".BASE_URL."home");
+			else
+				$this->helper->showError("No se pudo insertar la tarea correctamente");
+		}else{ 
+			$this->view->showError("Error al insertar producto");
+		}	
 	}
 	
 	function DeleteProducts($params = null){
 		$this->helper->checkLoggedIn();
 		$products_id = $params[':ID'];
-		$path = $this->model->GetProductId($products_id);
-		unlink($path->imagen);
+		if(isset($products_id) && $products_id != ""){
+			$path = $this->model->GetProductId($products_id);
+			unlink($path->imagen);
 
-		$this->model->DeleteProducts($products_id);
-		header("Location:".BASE_URL."home");
+			$this->model->DeleteProducts($products_id);
+			header("Location:".BASE_URL."home");
+		}else {
+			$this->view->showError("Erro al eliminar un producto");
+
+	}
 	}
 
 
@@ -90,27 +123,37 @@ class ProductsController {
 		$id = $params[':ID'];
 		$categories = $this->modelCategories->GetCategories();
 		$product = $this->model->GetProductById($id);
-		$this->view->ShowEditProducts($id,$categories,$product);
+
+		if(isset($id) && $id != "" && isset($categories) && $categories != "" && isset($product) && $product != ""){ 
+			$this->view->ShowEditProducts($id,$categories,$product);
+		} else {
+			$this->view->ShowError("Error al editar el producto");
+		}
 	}
 
 	function UpdateProducts($params = null) {
 		$this->helper->checkLoggedIn();
 		$id = $params[':ID'];
 		//Si no se edito la imagen, viene vacio, entonces inserto la previa.
-		if($_FILES['update_img']['name'] == ""){
-			$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria'],$_POST['previous_img']);
-		} else {
-		//Si se edito la imagen, pregunto que tipo es, la meto el nombre, borro la previa e inserto la nueva.	
-			if($_FILES['update_img']['type'] == "image/jpg" || $_FILES['update_img']['type'] == "image/jpeg" || $_FILES['update_img']['type'] == "image/png" || '…') {	
-				$realName = $this->uniqueSaveName($_FILES['update_img']['name'], $_FILES['update_img']['tmp_name']);
-			
-				if(isset($_POST['previous_img'])) {
-				unlink($_POST['previous_img']);
-			}
+		if (isset($id) && $id != "" && isset($_POST['update_marca']) && $_POST['update_marca'] != "" && isset($_POST['update_talle']) && $_POST['update_talle'] != "" && isset($_POST['update_precio']) && $_POST['update_precio'] != "" && isset($_POST['categoria']) && $_POST['categoria'] != "" ) {
+			if($_FILES['update_img']['name'] == ""){
+				$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria'],$_POST['previous_img']);
+			} else {
+			//Si se edito la imagen, pregunto que tipo es, la meto el nombre, borro la previa e inserto la nueva.	
+				if($_FILES['update_img']['type'] == "image/jpg" || $_FILES['update_img']['type'] == "image/jpeg" || $_FILES['update_img']['type'] == "image/png" || '…') {	
+					$realName = $this->uniqueSaveName($_FILES['update_img']['name'], $_FILES['update_img']['tmp_name']);
+				
+					if(isset($_POST['previous_img'])) {
+					unlink($_POST['previous_img']);
+				}
 
-				$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria'], $realName);
+					$this->model->UpdateProducts($id,$_POST['update_marca'],$_POST['update_talle'],$_POST['update_precio'],$_POST['categoria'], $realName);
+				}
 			}
+		} else {
+			$this->view->showError("Error al actualizar");
 		}
+			
 
 		header("Location:".BASE_URL."home");
 	}

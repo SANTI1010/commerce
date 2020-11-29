@@ -9,7 +9,7 @@ class ProductsView {
 		$this->title = "Lista de Productos";
 	}
 
-	function ShowHome($products,$categorias,$comments,$users,$rol=null) {
+	function ShowHome($products,$categorias,$comments,$users,$rol=null, $countFilas = null, $productLimit = null) {
 		$smarty = new Smarty();
 		$smarty->assign('titulo',$this->title);
 		$smarty->assign('products', $products);
@@ -17,6 +17,8 @@ class ProductsView {
 		$smarty->assign('comments', $comments);
 		$smarty->assign('users', $users);
 		$smarty->assign('rol', $rol);
+		$smarty->assign('countFilas', $countFilas);
+		$smarty->assign('productLimit', $productLimit);
 
 		$smarty->display('templates/products.tpl'); 
 	}

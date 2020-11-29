@@ -107,7 +107,7 @@
     <!---------------------->
     <!--------USER--------->
     <!---------------------->
-    {if $rol == 'user'}    
+    {if $rol == 'user' || $rol == NULL}    
         
         <div class="container">
             <ul class="list-group">
@@ -134,10 +134,42 @@
 	<div class="container">
       	<ul class="list-group">
       		<h1 class="titulo">Listado de items</h1>
+            
+            {assign var="articulo_por_pagina" value=3}
+            {assign var="total_productos_db" value=$countFilas}
+            {assign var="paginas" value= $total_productos_db / $articulo_por_pagina }
+            {assign var="paginas_total" value=ceil($paginas)}
+
             {if $rol == 'user'}
-                {foreach from = $products item=product}
-      			   <li class="list-group-item list-group-item-success"><p>El producto es {$product->nombre}</p>{$product->marca} <img src="{$product->imagen}"> <button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>      		
+                {foreach from = $productLimit item=product}
+      			   <li class="list-group-item list-group-item-success">
+                        <p>El producto es {$product->marca}</p>
+                        {$product->marca}
+                        <img src="{$product->imagen}">
+                        <button type="button" class="btn btn-warning">
+                            <a href="detalle/{$product->id_producto}">Detalle</a>
+                        </button>
+                    </li>      		
          	    {/foreach}
+                <nav aria-label= "Paginacion">
+                    
+
+                        <div class="paginador">
+                            <ul>
+                                <li class="page-item {if $smarty.get.pagina <= 1} disabled {else} '' {/if}">
+                                    <a class="page-link" href="products?pagina={$smarty.get.pagina-1}">Anterior</a>
+                                </li>
+                                {for $i=0 to $paginas-1}
+                                    <li class="pageSelected page-item {if $smarty.get.pagina == $i+1} active {else} '' {/if} ">
+                                        <a class="page-link" href="products?pagina={$i+1}">{$i+1}</a>
+                                    </li>
+                                {/for}
+                                <li class="page-item {if $smarty.get.pagina >= $paginas} disabled {else} '' {/if}">
+                                    <a class="page-link" href="products?pagina={$smarty.get.pagina+1}">Siguiente</a>
+                                </li>
+                            </ul>
+                        </div>
+                </nav>
             {else if $rol == 'admin'}
                {foreach from = $products item=product}
                     <li class="list-group-item list-group-item-success">
@@ -155,10 +187,11 @@
                         </button>
 
                     </li>
-                {/foreach}    
+                {/foreach}   
             {else}    
                 {foreach from = $products item=product}
-                    <li class="list-group-item list-group-item-success"><p>El producto es {$product->nombre}</p>{$product->marca} <button type="button" class="btn btn-warning"> <a href="detalle/{$product->id_producto}">Detalle</a></button></li>
+                    <li class="list-group-item list-group-item-success"><p>El producto es {$product->nombre}</p>{$product->marca} <img src="{$product->imagen}"><button type="button" class="btn btn-warning">
+                    <a href="detalle/{$product->id_producto}">Detalle</a></button></li>
                 {/foreach}
             {/if} 
 

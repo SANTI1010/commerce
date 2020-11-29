@@ -16,6 +16,21 @@ class ProductsModel {
 		return $this->db;
 
 	}	
+		//Cuenta cuantas filas hay en la tabla
+		function GetAllProducts() {
+			$sentencia = $this->db->prepare("SELECT * FROM productos");
+		    $sentencia->execute();
+		    return $sentencia->rowCount(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
+		}
+
+		function GetProductsLimit($page,$articulo_por_pagina) {
+			$sentencia = $this->db->prepare("SELECT * FROM productos LIMIT :iniciar,:nArticulos");
+			$sentencia->bindParam(':iniciar', $page,PDO::PARAM_INT);
+			$sentencia->bindParam(':nArticulos', $articulo_por_pagina,PDO::PARAM_INT);
+
+		    $sentencia->execute();
+		    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
+		}
 
 		//Seleccionar
 		function GetProducts(){

@@ -28,6 +28,8 @@
 		          
 		          <button type="submit" class="btn btn-primary">Agregar</button>
 		        </form>
+
+		        <a href="volver">Volver</a>
 		    </div>
 
 {include file="footer.tpl"}		
