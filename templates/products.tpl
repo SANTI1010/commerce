@@ -51,7 +51,7 @@
         </div>
 
         <div class="container">
-            <h1 class="titulo">Agregar items</h1>
+            <h1 class="titulo">Agregar Producto</h1>
               <form action="insert" method="post" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="inputState">Categorias</label>
@@ -124,7 +124,7 @@
   
     {if $rol != 'admin' }
         <div class="container">
-            <h1 class="titulo">Listado de Categorias</h1>
+            <h1 class="titulo">Filtro por Categorias</h1>
             {foreach from = $categorias item=categoria}
                 <button type="button" class="btn btn-danger"><a class="btn-text" href="ordenar/{$categoria->id_categoria}">Filtrar por {$categoria->nombre}</a></button>
             {/foreach}

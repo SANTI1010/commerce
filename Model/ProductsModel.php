@@ -16,21 +16,7 @@ class ProductsModel {
 		return $this->db;
 
 	}	
-		//Cuenta cuantas filas hay en la tabla
-		function GetAllProducts() {
-			$sentencia = $this->db->prepare("SELECT * FROM productos");
-		    $sentencia->execute();
-		    return $sentencia->rowCount(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
-		}
-
-		function GetProductsLimit($page,$articulo_por_pagina) {
-			$sentencia = $this->db->prepare("SELECT * FROM productos LIMIT :iniciar,:nArticulos");
-			$sentencia->bindParam(':iniciar', $page,PDO::PARAM_INT);
-			$sentencia->bindParam(':nArticulos', $articulo_por_pagina,PDO::PARAM_INT);
-
-		    $sentencia->execute();
-		    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
-		}
+		
 
 		//Seleccionar
 		function GetProducts(){
@@ -63,8 +49,8 @@ class ProductsModel {
 		//Borrar
 		function DeleteProducts($product_id) {
 		    $sentencia = $this->db->prepare("DELETE FROM productos WHERE id_producto=?");
-		    $sentencia->execute(array($product_id));
-		    return $sentencia->rowCount();//me dice cuantas filas toco
+		   return $sentencia->execute(array($product_id));
+		    //return $sentencia->rowCount();//me dice cuantas filas toco
 		}
 
 				//Detallar
@@ -100,8 +86,22 @@ class ProductsModel {
 			    $sentencia->execute(array($marca,$talle,$precio,$id_categoria,$id));
 			    return $sentencia->rowCount();	
 			}
+		}
 
-		    
+		//Cuenta cuantas filas hay en la tabla
+		function GetCountProducts() {
+			$sentencia = $this->db->prepare("SELECT * FROM productos");
+		    $sentencia->execute();
+		    return $sentencia->rowCount(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
+		}
+
+		function GetProductsLimit($page,$articulo_por_pagina) {
+			$sentencia = $this->db->prepare("SELECT * FROM productos LIMIT :iniciar,:nArticulos");
+			$sentencia->bindParam(':iniciar', $page,PDO::PARAM_INT);
+			$sentencia->bindParam(':nArticulos', $articulo_por_pagina,PDO::PARAM_INT);
+
+		    $sentencia->execute();
+		    return $sentencia->fetchAll(PDO::FETCH_OBJ);//me lo trae en formato OBJETO
 		}
 }
 

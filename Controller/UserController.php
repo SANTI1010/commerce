@@ -112,17 +112,12 @@ class UserController {
 		
 	}
 
-
-
 	public function ShowLoguearme() {
 		$this->view->ShowLoguearme();
 	}
-
 
 	public function Logout() {
         $this->authHelper->Logout();
         header('Location: ' . LOGIN);
     }
-
-
 }

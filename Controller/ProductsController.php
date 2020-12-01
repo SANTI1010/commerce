@@ -34,11 +34,10 @@ class ProductsController {
 		$categories = $this->modelCategories->GetCategories();
 		$users = $this->modelUsers->getUsers();
 		$comments = $this->modelComments->getCommentByNameUser();
-		$countFilas = $this->model->GetAllProducts();
+		$countFilas = $this->model->GetCountProducts();
 		$rol = $this->helper->getRol();
 
-		if(isset($rol) && $rol == 'user') {
-
+		if(isset($rol) && $rol == 'user' && isset($products) && $products != "" && isset($categories) && $categories != "" && isset($users) && $users != "" && isset($comments) && $comments != "") {
 			//Paginación
 			$articulo_por_pagina = 3;
 	        $total_productos_db = $countFilas;
@@ -59,9 +58,11 @@ class ProductsController {
 			$productLimit = $this->model->GetProductsLimit($page,$articulo_por_pagina);
 			$this->helper->checkLoggedIn();
 			$this->view->ShowHome($products,$categories,$comments,$users,$rol,$countFilas, $productLimit);
-		} else if(isset($rol) && $rol == 'admin'){
+
+		} else if(isset($rol) && $rol == 'admin' && isset($products) && $products != "" && isset($categories) && $categories != "" && isset($users) && $users != "" && isset($comments) && $comments != ""){
 			$this->helper->checkLoggedIn();
 			$this->view->ShowHome($products,$categories,$comments,$users,$rol,$countFilas);				
+		
 		} else {
 			$this->view->ShowHome($products,$categories,$comments,$users,$rol);
 		}
@@ -93,7 +94,7 @@ class ProductsController {
 			}else {
 				$success = $this->model->InsertProducts($_POST['input_marca'],$_POST['input_talle'],$_POST['input_precio'],$_POST['categoria']);
 			}
-			
+			//Si inserto correctamente
 			if($success)
 				header("Location:".BASE_URL."home");
 			else
@@ -110,12 +111,17 @@ class ProductsController {
 			$path = $this->model->GetProductId($products_id);
 			unlink($path->imagen);
 
-			$this->model->DeleteProducts($products_id);
-			header("Location:".BASE_URL."home");
-		}else {
-			$this->view->showError("Erro al eliminar un producto");
+			$success = $this->model->DeleteProducts($products_id);
 
-	}
+			if($success){
+				header("Location:".BASE_URL."home");
+			} else {
+			$this->view->showError("Error al eliminar un producto");
+			}
+
+		}else {
+			$this->view->showError("El producto que quiere eliminar no existe");
+		}
 	}
 
 
@@ -178,11 +184,9 @@ class ProductsController {
 		$this->viewCategories->ShowCategories($categories);
 	}
 
-
 	function volver() {
 		$this->view->ShowHomeLocation();
 	}
-
 
 	function ProductsCSR(){
 		$this->view->ShowProductsCSR();
