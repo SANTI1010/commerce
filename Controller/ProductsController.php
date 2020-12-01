@@ -35,32 +35,33 @@ class ProductsController {
 		$users = $this->modelUsers->getUsers();
 		$comments = $this->modelComments->getCommentByNameUser();
 		$countFilas = $this->model->GetAllProducts();
-
-		//Paginación
-		$articulo_por_pagina = 3;
-        $total_productos_db = $countFilas;
-        $paginas = $total_productos_db / $articulo_por_pagina;
-        $paginas_total = ceil($paginas);
-
-		
-		if(empty($_GET['pagina'])) {
-			header('Location:products?pagina=1');			
-		} else {
-			$page = ($_GET['pagina']-1)*3;
-		}
-
-		if($_GET['pagina'] > $paginas_total || $_GET['pagina'] <= 0){
-			header('Location:products?pagina=1');
-		}
-
-
-		
-		$productLimit = $this->model->GetProductsLimit($page,$articulo_por_pagina);
-
 		$rol = $this->helper->getRol();
-		if(isset($rol) && $rol != NULL ){
+
+		if(isset($rol) && $rol == 'user') {
+
+			//Paginación
+			$articulo_por_pagina = 3;
+	        $total_productos_db = $countFilas;
+	        $paginas = $total_productos_db / $articulo_por_pagina;
+	        $paginas_total = ceil($paginas);
+
+			
+			if(empty($_GET['pagina'])) {
+				header('Location:products?pagina=1');			
+			} else {
+				$page = ($_GET['pagina']-1)*3;
+			}
+
+			if($_GET['pagina'] > $paginas_total || $_GET['pagina'] <= 0){
+				header('Location:products?pagina=1');
+			}
+
+			$productLimit = $this->model->GetProductsLimit($page,$articulo_por_pagina);
 			$this->helper->checkLoggedIn();
-			$this->view->ShowHome($products,$categories,$comments,$users,$rol,$countFilas, $productLimit);				
+			$this->view->ShowHome($products,$categories,$comments,$users,$rol,$countFilas, $productLimit);
+		} else if(isset($rol) && $rol == 'admin'){
+			$this->helper->checkLoggedIn();
+			$this->view->ShowHome($products,$categories,$comments,$users,$rol,$countFilas);				
 		} else {
 			$this->view->ShowHome($products,$categories,$comments,$users,$rol);
 		}

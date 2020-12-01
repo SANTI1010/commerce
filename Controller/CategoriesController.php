@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
 
 require_once "./View/CategoriesView.php";
 require_once "./Model/CategoriesModel.php";

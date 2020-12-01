@@ -43,7 +43,7 @@ class ProductsModel {
 		function GetProductId($id){
 			$sentencia = $this->db->prepare("SELECT * FROM productos WHERE id_producto=?");
 		    $sentencia->execute(array($id));
-		    return $sentencia->fetch(PDO::FETCH_OBJ);
+		    return $sentencia->fetch(PDO::FETCH_OBJ);//trae un solo dato
 		}
 
 
