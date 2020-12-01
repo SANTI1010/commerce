@@ -142,7 +142,7 @@
 
             {if $rol == 'user'}
                 {foreach from = $productLimit item=product}
-      			   <li class="list-group-item list-group-item-success">
+      			   <li class="list-group-item">
                         <p>El producto es {$product->marca}</p>
                         {$product->marca}
                         <img src="{$product->imagen}">
@@ -172,7 +172,7 @@
                 </nav>
             {else if $rol == 'admin'}
                {foreach from = $products item=product}
-                    <li class="list-group-item list-group-item-success">
+                    <li class="list-group-item">
                         <p>El producto es {$product->nombre}</p>
                         {$product->marca}
                         <img src="{$product->imagen}">
