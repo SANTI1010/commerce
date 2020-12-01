@@ -133,15 +133,10 @@
 
 	<div class="container">
       	<ul class="list-group">
-      		<h1 class="titulo">Listado de items</h1>
-            
-            {assign var="articulo_por_pagina" value=3}
-            {assign var="total_productos_db" value=$countFilas}
-            {assign var="paginas" value= $total_productos_db / $articulo_por_pagina }
-            {assign var="paginas_total" value=ceil($paginas)}
+      		<h1 class="titulo">Listado de productos</h1>
 
             {if $rol == 'user'}
-                {foreach from = $productLimit item=product}
+                {foreach from = $products item=product}
       			   <li class="list-group-item">
                         <p>El producto es {$product->marca}</p>
                         {$product->marca}
@@ -151,6 +146,37 @@
                         </button>
                     </li>      		
          	    {/foreach}
+                
+            {else if $rol == 'admin'}
+               {foreach from = $products item=product}
+                    <li class="list-group-item">
+                        <p>El producto es {$product->nombre}</p>
+                        {$product->marca}
+                        <img src="{$product->imagen}">
+                        <button type="button" class="btn btn-warning"> 
+                            <a href="detalle/{$product->id_producto}">Detalle</a>
+                        </button>
+                        <button type="button" class="btn btn-success"> 
+                            <a href="editProducts/{$product->id_producto}">Editar producto</a>
+                        </button>
+                        <button type="button" class="btn btn-danger">
+                            <a href="delete/{$product->id_producto}">Eliminar</a>
+                        </button>
+
+                    </li>
+                {/foreach}   
+            {else} 
+
+
+                {assign var="articulo_por_pagina" value=3}
+                {assign var="total_productos_db" value=$countFilas}
+                {assign var="paginas" value= $total_productos_db / $articulo_por_pagina }
+                {assign var="paginas_total" value=ceil($paginas)}
+
+                {foreach from = $productLimit item=product}
+                    <li class="list-group-item list-group-item-success"><p>El producto es {$product->nombre}</p>{$product->marca} <img src="{$product->imagen}"><button type="button" class="btn btn-warning">
+                    <a href="detalle/{$product->id_producto}">Detalle</a></button></li>
+                {/foreach}
                 <nav aria-label= "Paginacion">
                     
 
@@ -170,29 +196,6 @@
                             </ul>
                         </div>
                 </nav>
-            {else if $rol == 'admin'}
-               {foreach from = $products item=product}
-                    <li class="list-group-item">
-                        <p>El producto es {$product->nombre}</p>
-                        {$product->marca}
-                        <img src="{$product->imagen}">
-                        <button type="button" class="btn btn-warning"> 
-                            <a href="detalle/{$product->id_producto}">Detalle</a>
-                        </button>
-                        <button type="button" class="btn btn-success"> 
-                            <a href="editProducts/{$product->id_producto}">Editar producto</a>
-                        </button>
-                        <button type="button" class="btn btn-danger">
-                            <a href="delete/{$product->id_producto}">Eliminar</a>
-                        </button>
-
-                    </li>
-                {/foreach}   
-            {else}    
-                {foreach from = $products item=product}
-                    <li class="list-group-item list-group-item-success"><p>El producto es {$product->nombre}</p>{$product->marca} <img src="{$product->imagen}"><button type="button" class="btn btn-warning">
-                    <a href="detalle/{$product->id_producto}">Detalle</a></button></li>
-                {/foreach}
             {/if} 
 
      	</ul>

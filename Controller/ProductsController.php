@@ -38,6 +38,14 @@ class ProductsController {
 		$rol = $this->helper->getRol();
 
 		if(isset($rol) && $rol == 'user' && isset($products) && $products != "" && isset($categories) && $categories != "" && isset($users) && $users != "" && isset($comments) && $comments != "") {
+			$this->helper->checkLoggedIn();
+			$this->view->ShowHome($products,$categories,$comments,$users,$rol,$countFilas);
+
+		} else if(isset($rol) && $rol == 'admin' && isset($products) && $products != "" && isset($categories) && $categories != "" && isset($users) && $users != "" && isset($comments) && $comments != ""){
+			$this->helper->checkLoggedIn();
+			$this->view->ShowHome($products,$categories,$comments,$users,$rol,$countFilas);				
+		
+		} else {
 			//Paginación
 			$articulo_por_pagina = 3;
 	        $total_productos_db = $countFilas;
@@ -56,15 +64,8 @@ class ProductsController {
 			}
 
 			$productLimit = $this->model->GetProductsLimit($page,$articulo_por_pagina);
-			$this->helper->checkLoggedIn();
-			$this->view->ShowHome($products,$categories,$comments,$users,$rol,$countFilas, $productLimit);
-
-		} else if(isset($rol) && $rol == 'admin' && isset($products) && $products != "" && isset($categories) && $categories != "" && isset($users) && $users != "" && isset($comments) && $comments != ""){
-			$this->helper->checkLoggedIn();
-			$this->view->ShowHome($products,$categories,$comments,$users,$rol,$countFilas);				
-		
-		} else {
-			$this->view->ShowHome($products,$categories,$comments,$users,$rol);
+			
+			$this->view->ShowHome($products,$categories,$comments,$users,$rol,$countFilas,$productLimit);
 		}
 		
 	}
